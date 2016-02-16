@@ -17,8 +17,16 @@ class GameObject {
 		x = s_x;
 		y = s_y;
 		id = ID.GenID();
+		flaggedDelete = false;
 	}
-	public void Delete() {}  // Simulated destructor.
+
+	// Flag this object to be destroyed, and delete it in the destroy object phase.
+	public void Destroy() {
+		if (flaggedDelete) {
+			return;
+		}
+		flaggedDelete = true;
+	}
 
 	// Run one step for this object
 	public void LogicStep() {}
@@ -30,9 +38,13 @@ class GameObject {
 	public void HandleMouseMove(int x, int y) {}
 	public void HandleKeyDown(int keyCode) { }
 	public void HandleKeyUp(int keyCode) { }
+	public boolean IsFlaggedDeleted() {
+		return flaggedDelete;
+	}
 
 	// Variables.
-  public int id;    // Unique Identifier for this object
+  public int id;  // Unique Identifier for this object
 	public int x;  // X position in the scene
   public int y;  // Y position in the scene
+	private boolean flaggedDelete;
 }

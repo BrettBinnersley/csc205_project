@@ -5,5 +5,6 @@ Brett Binnersley, V00776751, Uvic
 This is a very simple top down shooter game.
 
 To run:
-javac *.java
+javac *.java -d bin
+cd bin
 java Start

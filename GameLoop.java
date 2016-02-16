@@ -26,12 +26,15 @@ import javax.swing.Action;
 import javax.swing.AbstractAction;
 import javax.swing.KeyStroke;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 
 class GameLoop extends JComponent {
 
 	public GameLoop(int width, int height) {
     canvas_width = width;
     canvas_height = height;
+		gameobjects = new HashMap<Integer, GameObject>();  // Objects in game
 		setDoubleBuffered(true);
 		setSize(width, height);
 
@@ -93,7 +96,7 @@ class GameLoop extends JComponent {
 		if (y < 0 || y >= canvasHeight()) {
       return;
     }
-		for (GameObject obj : gameobjects) {
+		for (GameObject obj : gameobjects.values()) {
 			obj.HandleMouseUp(x, y, button_number);
 		}
 	}
@@ -106,7 +109,7 @@ class GameLoop extends JComponent {
 		if (y < 0 || y >= canvasHeight()) {
       return;
     }
-		for (GameObject obj : gameobjects) {
+		for (GameObject obj : gameobjects.values()) {
 			obj.HandleMouseUp(x, y, button_number);
 		}
 	}
@@ -118,25 +121,24 @@ class GameLoop extends JComponent {
 		if (y < 0 || y >= canvasHeight()) {
       return;
     }
-		for (GameObject obj : gameobjects) {
+		for (GameObject obj : gameobjects.values()) {
 			obj.HandleMouseMove(x, y);
 		}
 	}
 
 	private void HandleKeyDown(KeyEvent e) {
 		int keyCode = e.getKeyCode();
-		for (GameObject obj : gameobjects) {
+		for (GameObject obj : gameobjects.values()) {
 			obj.HandleKeyDown(keyCode);
 		}
 	}
 
 	private void HandleKeyUp(KeyEvent e) {
 		int keyCode = e.getKeyCode();
-		for (GameObject obj : gameobjects) {
+		for (GameObject obj : gameobjects.values()) {
 			obj.HandleKeyUp(keyCode);
 		}
 	}
-
 
 	@Override
 	public void paintComponent(Graphics g) {
@@ -144,19 +146,33 @@ class GameLoop extends JComponent {
 		Graphics2D g2d = (Graphics2D)g;
 		g2d.setColor(new Color(128,128,128));
 		g2d.fillRect(0, 0, canvas_width, canvas_height);
-		for (GameObject obj : gameobjects) {
+		for (GameObject obj : gameobjects.values()) {
 			obj.Render(g2d);
 		}
 	}
 
-	public void drawFrame(double frame_delta_ms) {
+	public void RunLogicDrawEntities(double frame_delta_ms) {
 		// Step every object
-		for (GameObject obj : gameobjects) {
+		for (GameObject obj : gameobjects.values()) {
 			obj.LogicStep();
 		}
-		repaint();  //This results in the paintComponent method above being called.
+
+		// Remove every object flagged for deletion
+		ArrayList<Integer> deleteObjects = new ArrayList<Integer>();
+		for (GameObject obj : gameobjects.values()) {
+			if (obj.IsFlaggedDeleted()) {
+				deleteObjects.add(obj.id);
+			}
+		}
+		for (Integer key : deleteObjects) {
+			gameobjects.remove(key);
+		}
+		deleteObjects.clear();
+
+		// Draw all the objects that still exist in the game.
+		repaint();
 	}
 
   private int canvas_width, canvas_height;
-	private GameObject[] gameobjects;
+	private HashMap<Integer, GameObject> gameobjects;
 }

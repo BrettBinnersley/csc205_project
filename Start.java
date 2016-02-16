@@ -53,7 +53,7 @@ public class Start {
 			long this_frame = System.nanoTime();
 			long frame_delta = this_frame - last_frame;
 			double frame_delta_ms = frame_delta/1000000.0;
-			loop.drawFrame(frame_delta_ms);
+			loop.RunLogicDrawEntities(frame_delta_ms);
 			last_frame = this_frame;
 		}
 	}
