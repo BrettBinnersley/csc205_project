@@ -35,6 +35,9 @@ class GameLoop extends JComponent {
     canvas_width = width;
     canvas_height = height;
 		gameobjects = new HashMap<Integer, GameObject>();  // Objects in game
+		downKeys = new HashSet<Integer>();
+		Player p = new Player(200, 200);
+		gameobjects.put(p.id, p);
 		setDoubleBuffered(true);
 		setSize(width, height);
 
@@ -128,32 +131,29 @@ class GameLoop extends JComponent {
 
 	private void HandleKeyDown(KeyEvent e) {
 		int keyCode = e.getKeyCode();
+		downKeys.add(keyCode);
 		for (GameObject obj : gameobjects.values()) {
-			obj.HandleKeyDown(keyCode);
+			obj.HandleKeyPress(keyCode);
 		}
 	}
 
 	private void HandleKeyUp(KeyEvent e) {
 		int keyCode = e.getKeyCode();
+		downKeys.remove(keyCode);
 		for (GameObject obj : gameobjects.values()) {
-			obj.HandleKeyUp(keyCode);
+			obj.HandleKeyRelease(keyCode);
 		}
 	}
 
+	// Draw all the objects that still exist in the game.
 	@Override
 	public void paintComponent(Graphics g) {
-		super.paintComponent(g);
-		Graphics2D g2d = (Graphics2D)g;
-		g2d.setColor(new Color(128,128,128));
-		g2d.fillRect(0, 0, canvas_width, canvas_height);
-		for (GameObject obj : gameobjects.values()) {
-			obj.Render(g2d);
-		}
-	}
 
-	public void RunLogicDrawEntities(double frame_delta_ms) {
-		// Step every object
+		// Step every object and handle key events
 		for (GameObject obj : gameobjects.values()) {
+			for (int key : downKeys) {
+				obj.HandleKeyDown(key);
+			}
 			obj.LogicStep();
 		}
 
@@ -169,10 +169,21 @@ class GameLoop extends JComponent {
 		}
 		deleteObjects.clear();
 
-		// Draw all the objects that still exist in the game.
+		// Render the component
+		super.paintComponent(g);
+		Graphics2D g2d = (Graphics2D)g;
+		g2d.setColor(new Color(128,128,128));
+		g2d.fillRect(0, 0, canvas_width, canvas_height);
+		for (GameObject obj : gameobjects.values()) {
+			obj.Render(g2d);
+		}
+	}
+
+	public void RunLogicDrawEntities(double frame_delta_ms) {
 		repaint();
 	}
 
   private int canvas_width, canvas_height;
 	private HashMap<Integer, GameObject> gameobjects;
+	private HashSet<Integer> downKeys;
 }
