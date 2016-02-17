@@ -14,7 +14,7 @@ import java.awt.image.BufferedImage;
 class GameObject implements Comparable<GameObject> {
 
 	// Constructor / Destructor
-	public GameObject(int s_x, int s_y, String s_image) {
+	public GameObject(int s_x, int s_y) {
 		x = (double)s_x;
 		y = (double)s_y;
 		origin_x = 0;
@@ -22,11 +22,17 @@ class GameObject implements Comparable<GameObject> {
 		depth = 0;
 		id = ID.GenID();
 		flaggedDelete = false;
+		image = null;
+	}
+
+	public void SetImage(String s_image, int o_x, int o_y) {
 		if (s_image == null) {
 			image = null;
 		} else {
 			image = Resources.GetImage(s_image);
 		}
+		origin_x = o_x;
+		origin_y = o_y;
 	}
 
 	// Flag this object to be destroyed, and delete it in the destroy object phase.
@@ -73,9 +79,9 @@ class GameObject implements Comparable<GameObject> {
 	@Override
 	public int compareTo(GameObject o) {
 		if (depth < o.depth) {
-			return -1;
-		} else {
 			return 1;
+		} else {
+			return -1;
 		}
 	}
 }

@@ -5,13 +5,12 @@ Brett Binnersley, V00776751, Uvic
 This is a very simple top down shooter game.
 
 To run:
-javac *.java -d bin
+javac *.java Scene/*.java GameObjects/*.java -d bin
 cd bin
 java Start
 
 Or, on Mac / Linux
 ./run
-
 
 
 On Github:

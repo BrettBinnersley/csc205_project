@@ -49,21 +49,22 @@ class GameLoop extends JComponent {
 	}
 
 	public GameLoop(int width, int height) {
-    canvas_width = width;
-    canvas_height = height;
-		gameobjects = new HashMap<Integer, GameObject>();  // Objects in game
-		keyStates = new ConcurrentHashMap<Integer, KeyState>();
-		mouseStates = new ConcurrentHashMap<Integer, MouseState>();
-
-		for (int i=0; i<10; ++i) {
-			Enemy e = new Enemy((int)(Math.random() * (double)width), (int)(Math.random() * (double)height));
-			gameobjects.put(e.id, e);
-		}
-		Player p = new Player(200, 200);
-		gameobjects.put(p.id, p);
+		// Window & Render state.
+		canvas_width = width;
+		canvas_height = height;
 		setDoubleBuffered(true);
 		setSize(width, height);
 
+		// Create environment
+		gameobjects = new HashMap<Integer, GameObject>();
+		keyStates = new ConcurrentHashMap<Integer, KeyState>();
+		mouseStates = new ConcurrentHashMap<Integer, MouseState>();
+		ArrayList<GameObject> objects = SceneCreator.Create(width, height);
+		for (GameObject o : objects) {
+			gameobjects.put(o.id, o);
+		}
+
+		// Mouse Events
 		addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {

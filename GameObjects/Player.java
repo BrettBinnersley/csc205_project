@@ -12,10 +12,9 @@ import java.util.HashMap;
 class Player extends GameObject {
 
   public Player(int s_x, int s_y) {
-    super(s_x, s_y, "background");
+    super(s_x, s_y);
+    SetImage("background", 128, 128);
     moveSpeed = 2.0;
-    origin_x = 128;
-    origin_y = 128;
     depth = -1;
   }
 
