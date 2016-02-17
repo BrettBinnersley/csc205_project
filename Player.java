@@ -12,8 +12,8 @@ import java.util.HashMap;
 class Player extends GameObject {
 
   public Player(int s_x, int s_y) {
-    super(s_x, s_y);
-    moveSpeed = 0.5;
+    super(s_x, s_y, "background");
+    moveSpeed = 2.0;
   }
 
   // Move using WADS or the ARROW keys
@@ -53,10 +53,9 @@ class Player extends GameObject {
   // Render a player
   @Override
   public void Render(Graphics2D canvas) {
-    canvas.setColor(new Color(0, 255, 0));
-    canvas.fillOval((int)x - 10, (int)y - 10, 20, 20);
-    canvas.setColor(new Color(0, 0, 0));
+    canvas.setColor(new Color(0, 0, 255));
     canvas.drawLine((int)x, (int)y, Mouse.X(), Mouse.Y());
+    canvas.drawImage(image, (int)x - 10, (int)y - 10, null);
   }
 
   private double moveSpeed;

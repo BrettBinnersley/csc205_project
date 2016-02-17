@@ -9,7 +9,7 @@ import java.awt.Graphics2D;
 
 class Enemy extends GameObject {
   public Enemy(int s_x, int s_y) {
-    super(s_x, s_y);
+    super(s_x, s_y, null);
   }
 
   @Override

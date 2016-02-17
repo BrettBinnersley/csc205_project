@@ -1,8 +1,10 @@
 /* Resource
 Brett Binnersley, V00776751
 
-Resource handler for all the resources.
-They should be safe to read from anywhere in the render loop.
+Resource handler for all the resources. This will automatically
+load all the resources (images) located in the resources/ folder
+and make them readily available for use.
+THREAD SAFE (read in before threads spawn, only used within a single thread)
 */
 
 import java.awt.image.BufferedImage;
@@ -45,7 +47,7 @@ class Resources {
   // Lazily load resources.
   // Find a resource and return the handle to it. Ensures that only one copy of each
   // resource will ever exist at any given time. This is quick.
-  public BufferedImage GetResource(String name) {
+  public static BufferedImage GetImage(String name) {
     BufferedImage img = _resources.get(name);
     if (img == null) {
       System.out.println("ERROR: Resource not found.");
