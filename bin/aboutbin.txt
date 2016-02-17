@@ -1,0 +1,2 @@
+The compiled java files should be placed in this folder for a
+cleaner folder structure.

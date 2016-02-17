@@ -55,6 +55,7 @@ class Player extends GameObject {
   public void Render(Graphics2D canvas) {
     canvas.setColor(new Color(0, 0, 255));
     canvas.drawLine((int)x, (int)y, Mouse.X(), Mouse.Y());
+    // canvas.rotate(1.2);
     canvas.drawImage(image, (int)x - 10, (int)y - 10, null);
   }
 

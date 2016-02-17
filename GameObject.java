@@ -53,9 +53,10 @@ class GameObject {
 
 
 	// Variables.
-  public int id;  // Unique Identifier for this object
+  public int id;  // Unique Identifier for this object - automatically set.
 	public double x;  // X position in the scene
   public double y;  // Y position in the scene
-	public BufferedImage image;
+	public double direction;  // Direction of this object.
+	public BufferedImage image;  // Image used for rendering. Optional - Can be null.
 	private boolean flaggedDelete;
 }
