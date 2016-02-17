@@ -17,6 +17,8 @@ class GameObject {
 	public GameObject(int s_x, int s_y, String s_image) {
 		x = (double)s_x;
 		y = (double)s_y;
+		origin_x = 0;
+		origin_y = 0;
 		id = ID.GenID();
 		flaggedDelete = false;
 		if (s_image == null) {
@@ -56,7 +58,13 @@ class GameObject {
   public int id;  // Unique Identifier for this object - automatically set.
 	public double x;  // X position in the scene
   public double y;  // Y position in the scene
-	public double direction;  // Direction of this object.
+	public double rotation;  // Rotation of this object (in radians).
+
+	// For rendering
+	public int origin_x;  // Origin (rotaiton point) for the image (pixel)
+	public int origin_y;  // Origin (rotaiton point) for the image (pixel)
 	public BufferedImage image;  // Image used for rendering. Optional - Can be null.
+
+	// Private that every object contains.
 	private boolean flaggedDelete;
 }

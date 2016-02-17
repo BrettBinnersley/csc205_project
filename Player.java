@@ -14,6 +14,8 @@ class Player extends GameObject {
   public Player(int s_x, int s_y) {
     super(s_x, s_y, "background");
     moveSpeed = 2.0;
+    origin_x = 128;
+    origin_y = 128;
   }
 
   // Move using WADS or the ARROW keys
@@ -50,13 +52,18 @@ class Player extends GameObject {
     }
   }
 
+  @Override
+  public void LogicStep() {
+    rotation += 0.01;
+  }
+
   // Render a player
   @Override
   public void Render(Graphics2D canvas) {
     canvas.setColor(new Color(0, 0, 255));
     canvas.drawLine((int)x, (int)y, Mouse.X(), Mouse.Y());
-    // canvas.rotate(1.2);
-    canvas.drawImage(image, (int)x - 10, (int)y - 10, null);
+    canvas.rotate(rotation, x, y);
+    canvas.drawImage(image, (int)x - origin_x, (int)y - origin_y, null);
   }
 
   private double moveSpeed;
