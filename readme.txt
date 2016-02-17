@@ -8,3 +8,6 @@ To run:
 javac *.java -d bin
 cd bin
 java Start
+
+Or, on Mac / Linux
+./run

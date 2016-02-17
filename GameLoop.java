@@ -36,6 +36,10 @@ class GameLoop extends JComponent {
     canvas_height = height;
 		gameobjects = new HashMap<Integer, GameObject>();  // Objects in game
 		downKeys = new HashSet<Integer>();
+		for (int i=0; i<10; ++i) {
+			Enemy e = new Enemy((int)(Math.random() * (double)width), (int)(Math.random() * (double)height));
+			gameobjects.put(e.id, e);
+		}
 		Player p = new Player(200, 200);
 		gameobjects.put(p.id, p);
 		setDoubleBuffered(true);
@@ -124,6 +128,8 @@ class GameLoop extends JComponent {
 		if (y < 0 || y >= canvasHeight()) {
       return;
     }
+		Mouse.SetMouseX(x);
+		Mouse.SetMouseY(y);
 		for (GameObject obj : gameobjects.values()) {
 			obj.HandleMouseMove(x, y);
 		}

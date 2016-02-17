@@ -54,6 +54,8 @@ class Player extends GameObject {
   public void Render(Graphics2D canvas) {
     canvas.setColor(new Color(0, 255, 0));
     canvas.fillOval((int)x - 10, (int)y - 10, 20, 20);
+    canvas.setColor(new Color(0, 0, 0));
+    canvas.drawLine((int)x, (int)y, Mouse.X(), Mouse.Y());
   }
 
   private double moveSpeed;
