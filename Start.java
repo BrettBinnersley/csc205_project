@@ -20,7 +20,12 @@ public class Start {
 
 	// Initialize and define the width / height of the window.
 	private Start() {
-		Resources.Initialize();
+		try {
+			Resources.Initialize();
+		} catch (Exception e) {
+			System.out.println("Errors loading resources");
+			return;
+		}
 		Initialize(1024, 768);
 	}
 

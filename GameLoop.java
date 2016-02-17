@@ -10,10 +10,8 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.Color;
-import javax.swing.JFrame;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
-import javax.swing.JComponent;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
@@ -24,18 +22,28 @@ import java.awt.event.MouseWheelListener;
 import java.awt.event.MouseWheelEvent;
 import javax.swing.Action;
 import javax.swing.AbstractAction;
+import javax.swing.JComponent;
+import javax.swing.JFrame;
 import javax.swing.KeyStroke;
 import java.util.ArrayList;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.HashMap;
 import java.util.HashSet;
 
 class GameLoop extends JComponent {
 
+	public enum KeyState {
+		KEYPRESS,
+		KEYHELD,
+		KEYRELEASE
+	}
+
 	public GameLoop(int width, int height) {
     canvas_width = width;
     canvas_height = height;
 		gameobjects = new HashMap<Integer, GameObject>();  // Objects in game
-		downKeys = new HashSet<Integer>();
+		downKeys = new ConcurrentHashMap<Integer, KeyState>();
+
 		for (int i=0; i<10; ++i) {
 			Enemy e = new Enemy((int)(Math.random() * (double)width), (int)(Math.random() * (double)height));
 			gameobjects.put(e.id, e);
@@ -137,17 +145,15 @@ class GameLoop extends JComponent {
 
 	private void HandleKeyDown(KeyEvent e) {
 		int keyCode = e.getKeyCode();
-		downKeys.add(keyCode);
-		for (GameObject obj : gameobjects.values()) {
-			obj.HandleKeyPress(keyCode);
-		}
+		downKeys.put(keyCode, KeyState.KEYPRESS);
 	}
 
 	private void HandleKeyUp(KeyEvent e) {
 		int keyCode = e.getKeyCode();
-		downKeys.remove(keyCode);
-		for (GameObject obj : gameobjects.values()) {
-			obj.HandleKeyRelease(keyCode);
+		if (downKeys.containsKey(keyCode)) {
+			downKeys.replace(keyCode, KeyState.KEYRELEASE);
+		} else {
+			downKeys.put(keyCode, KeyState.KEYRELEASE);
 		}
 	}
 
@@ -155,11 +161,35 @@ class GameLoop extends JComponent {
 	@Override
 	public void paintComponent(Graphics g) {
 
+		// Make a copy of the hashmap so that it is thread safe.
+		HashMap<Integer, KeyState> keyStates = downKeys.values();
+
+		for (HashMap.Entry<Integer, KeyState> t_state : downKeys.entrySet()) {
+			int key = t_state.getKey();
+    	KeyState state = t_state.getValue();
+			if (state == KeyState.KEYPRESS) {
+				for (GameObject obj : gameobjects.values()) {
+					obj.HandleKeyPress(key);
+				}
+				// Change concurrent state to held.
+			}
+			else if (state == KeyState.KEYHELD) {
+				for (GameObject obj : gameobjects.values()) {
+					obj.HandleKeyDown(key);
+				}
+			}
+			else if (state == KeyState.KEYRELEASE) {
+				for (GameObject obj : gameobjects.values()) {
+					obj.HandleKeyRelease(key);
+				}
+				// Delete concurrent state.
+			} else {
+				System.out.println('Error: Unknown Keystate');
+			}
+		}
+
 		// Step every object and handle key events
 		for (GameObject obj : gameobjects.values()) {
-			for (int key : downKeys) {
-				obj.HandleKeyDown(key);
-			}
 			obj.LogicStep();
 		}
 
@@ -191,5 +221,5 @@ class GameLoop extends JComponent {
 
   private int canvas_width, canvas_height;
 	private HashMap<Integer, GameObject> gameobjects;
-	private HashSet<Integer> downKeys;
+	private ConcurrentHashMap<Integer, KeyState> downKeys;
 }

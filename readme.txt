@@ -11,3 +11,9 @@ java Start
 
 Or, on Mac / Linux
 ./run
+
+
+
+
+TODO:
+Make keypress / release etc. thread safe (at the moment is not).

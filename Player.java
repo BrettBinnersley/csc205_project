@@ -7,6 +7,7 @@ Defines the user controller player.
 import java.awt.event.KeyEvent;
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.util.HashMap;
 
 class Player extends GameObject {
 
