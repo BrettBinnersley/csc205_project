@@ -20,10 +20,11 @@ public class Start {
 
 	// Initialize and define the width / height of the window.
 	private Start() {
-		initialize(1024, 768);
+		Resources.Initialize();
+		Initialize(1024, 768);
 	}
 
-	private void initialize(int width, int height) {
+	private void Initialize(int width, int height) {
 		viewerWindow = new JFrame();
 		viewerWindow.setTitle("CSC 205 Game - Spring 2016, Brett Binnersley");
 		viewerWindow.setBounds(100, 100, width, height + 25);  // magic number added from example. Left here.
