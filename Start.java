@@ -26,12 +26,12 @@ public class Start {
 			System.out.println("Errors loading resources");
 			return;
 		}
-		Initialize(1024, 768);
+		Initialize(Constants.windowWidth, Constants.windowHeight);
 	}
 
 	private void Initialize(int width, int height) {
 		viewerWindow = new JFrame();
-		viewerWindow.setTitle("CSC 205 Game - Spring 2016, Brett Binnersley");
+		viewerWindow.setTitle("CSC 205 Game - FPS: ??");
 		viewerWindow.setBounds(100, 100, width, height + 25);  // magic number added from example. Left here.
 		viewerWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -55,11 +55,29 @@ public class Start {
 	private void frame_loop() {
 		long last_frame = System.nanoTime();
 		while (true) {
+			// Do some time stuff
 			long this_frame = System.nanoTime();
-			long frame_delta = this_frame - last_frame;
-			double frame_delta_ms = frame_delta/1000000.0;
+			double frame_delta_ms = (double)(this_frame - last_frame) / 1000000.0;
+
+			// Run game logic
 			loop.RunLogicDrawEntities(frame_delta_ms);
-			last_frame = this_frame;
+			viewerWindow.setTitle("CSC 205 Game - FPS: " + (int)(1000.0 / frame_delta_ms));
+
+			// Figure out render time.
+			long now_time = System.nanoTime();
+			double renderTime = (double)(now_time - this_frame) / 1000000.0;  // Time in MS to run logic
+			double targetDelay = (1000.0 / (double)Constants.targetFPS);  // Target render time.
+			int sleepTime = Math.max((int)(targetDelay - renderTime), 0);
+
+			// Update the last time.
+			last_frame = now_time;
+
+			// Sleep (Zzz) time. This saves the CPU from killing itself.
+			try {
+				Thread.sleep(sleepTime);
+			} catch (Exception e) {
+				System.out.println("Interrupted Exception");
+			}
 		}
 	}
 
