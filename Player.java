@@ -16,6 +16,7 @@ class Player extends GameObject {
     moveSpeed = 2.0;
     origin_x = 128;
     origin_y = 128;
+    depth = -1;
   }
 
   // Move using WADS or the ARROW keys

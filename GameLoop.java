@@ -20,13 +20,16 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseWheelListener;
 import java.awt.event.MouseWheelEvent;
+import java.awt.geom.AffineTransform;
 import javax.swing.Action;
 import javax.swing.AbstractAction;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.KeyStroke;
+import java.util.Arrays.*;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -247,13 +250,21 @@ class GameLoop extends JComponent {
 		// Run all the events for every object.
 		RunEvents();
 
-		// Render the component
+		// Render the background
 		super.paintComponent(g);
 		Graphics2D g2d = (Graphics2D)g;
 		g2d.setColor(new Color(128,128,128));
 		g2d.fillRect(0, 0, canvas_width, canvas_height);
-		for (GameObject obj : gameobjects.values()) {
+
+		// Extract references to all the objects, and sort them by depth
+		ArrayList<GameObject> sorted = new ArrayList<GameObject>(gameobjects.values());
+		Collections.sort(sorted);
+
+		// Render the objects in the correct depth order
+		for (GameObject obj : sorted) {
+			AffineTransform trans = g2d.getTransform();  // Get current transform state.
 			obj.Render(g2d);
+			g2d.setTransform(trans);  // Reset transformation state.
 		}
 	}
 

@@ -11,7 +11,7 @@ below.
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
-class GameObject {
+class GameObject implements Comparable<GameObject> {
 
 	// Constructor / Destructor
 	public GameObject(int s_x, int s_y, String s_image) {
@@ -19,6 +19,7 @@ class GameObject {
 		y = (double)s_y;
 		origin_x = 0;
 		origin_y = 0;
+		depth = 0;
 		id = ID.GenID();
 		flaggedDelete = false;
 		if (s_image == null) {
@@ -53,9 +54,9 @@ class GameObject {
 	public void HandleKeyDown(int keyCode) { }  // Called when a key is held (every frame AFTER the first)
 	public void HandleKeyRelease(int keyCode) { }  // Called when a key is released.
 
-
 	// Variables.
   public int id;  // Unique Identifier for this object - automatically set.
+	public int depth; // Depth of this object.
 	public double x;  // X position in the scene
   public double y;  // Y position in the scene
 	public double rotation;  // Rotation of this object (in radians).
@@ -67,4 +68,14 @@ class GameObject {
 
 	// Private that every object contains.
 	private boolean flaggedDelete;
+
+	// For drawing the objects in the correct order (depth)
+	@Override
+	public int compareTo(GameObject o) {
+		if (depth < o.depth) {
+			return -1;
+		} else {
+			return 1;
+		}
+	}
 }
