@@ -16,7 +16,3 @@ Or, on Mac / Linux
 
 On Github:
 https://github.com/BrettBinnersley/csc205_a2
-
-
-TODO:
-Make keypress / release etc. thread safe (at the moment is not).

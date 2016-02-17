@@ -52,7 +52,6 @@ public class Start {
 		t.start();
 	}
 
-
 	private void frame_loop() {
 		long last_frame = System.nanoTime();
 		while (true) {

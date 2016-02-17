@@ -26,6 +26,7 @@ import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.KeyStroke;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -38,11 +39,18 @@ class GameLoop extends JComponent {
 		KEYRELEASE
 	}
 
+	public enum MouseState {
+		MOUSEPRESS,
+		MOUSEHELD,
+		MOUSERELEASE
+	}
+
 	public GameLoop(int width, int height) {
     canvas_width = width;
     canvas_height = height;
 		gameobjects = new HashMap<Integer, GameObject>();  // Objects in game
-		downKeys = new ConcurrentHashMap<Integer, KeyState>();
+		keyStates = new ConcurrentHashMap<Integer, KeyState>();
+		mouseStates = new ConcurrentHashMap<Integer, MouseState>();
 
 		for (int i=0; i<10; ++i) {
 			Enemy e = new Enemy((int)(Math.random() * (double)width), (int)(Math.random() * (double)height));
@@ -58,14 +66,14 @@ class GameLoop extends JComponent {
 			public void mousePressed(MouseEvent e) {
 				int x = e.getX();
 				int y = e.getY();
-				HandleMouseDown(x,y,e.getButton());
+				HandleMousePress(x,y,e.getButton());
 			}
 
 			@Override
 			public void mouseReleased(MouseEvent e) {
 				int x = e.getX();
 				int y = e.getY();
-				HandleMouseUp(x,y,e.getButton());
+				HandleMouseRelease(x,y,e.getButton());
 			}
 		});
 
@@ -98,35 +106,8 @@ class GameLoop extends JComponent {
 		return canvas_width;
 	}
 
-
 	private int canvasHeight() {
 		return canvas_height;
-	}
-
-
-	private void HandleMouseDown(int x, int y, int button_number) {
-		if (x < 0 || x >= canvasWidth()) {
-      return;
-    }
-		if (y < 0 || y >= canvasHeight()) {
-      return;
-    }
-		for (GameObject obj : gameobjects.values()) {
-			obj.HandleMouseUp(x, y, button_number);
-		}
-	}
-
-
-	private void HandleMouseUp(int x, int y, int button_number) {
-		if (x < 0 || x >= canvasWidth()) {
-      return;
-    }
-		if (y < 0 || y >= canvasHeight()) {
-      return;
-    }
-		for (GameObject obj : gameobjects.values()) {
-			obj.HandleMouseUp(x, y, button_number);
-		}
 	}
 
 	private void HandleMouseMove(int x, int y) {
@@ -138,64 +119,118 @@ class GameLoop extends JComponent {
     }
 		Mouse.SetMouseX(x);
 		Mouse.SetMouseY(y);
-		for (GameObject obj : gameobjects.values()) {
-			obj.HandleMouseMove(x, y);
+	}
+
+	private void HandleMousePress(int x, int y, int button_number) {
+		if (x < 0 || x >= canvasWidth()) {
+      return;
+    }
+		if (y < 0 || y >= canvasHeight()) {
+      return;
+    }
+		if (keyStates.containsKey(button_number)) {
+			mouseStates.replace(button_number, MouseState.MOUSEPRESS);
+		} else {
+			mouseStates.put(button_number, MouseState.MOUSEPRESS);
+		}
+	}
+
+	private void HandleMouseRelease(int x, int y, int button_number) {
+		if (x < 0 || x >= canvasWidth()) {
+      return;
+    }
+		if (y < 0 || y >= canvasHeight()) {
+      return;
+    }
+		if (keyStates.containsKey(button_number)) {
+			mouseStates.replace(button_number, MouseState.MOUSERELEASE);
+		} else {
+			mouseStates.put(button_number, MouseState.MOUSERELEASE);
 		}
 	}
 
 	private void HandleKeyDown(KeyEvent e) {
 		int keyCode = e.getKeyCode();
-		downKeys.put(keyCode, KeyState.KEYPRESS);
+		if (keyStates.containsKey(keyCode)) {
+			keyStates.replace(keyCode, KeyState.KEYPRESS);
+		} else {
+			keyStates.put(keyCode, KeyState.KEYPRESS);
+		}
 	}
 
 	private void HandleKeyUp(KeyEvent e) {
 		int keyCode = e.getKeyCode();
-		if (downKeys.containsKey(keyCode)) {
-			downKeys.replace(keyCode, KeyState.KEYRELEASE);
+		if (keyStates.containsKey(keyCode)) {
+			keyStates.replace(keyCode, KeyState.KEYRELEASE);
 		} else {
-			downKeys.put(keyCode, KeyState.KEYRELEASE);
+			keyStates.put(keyCode, KeyState.KEYRELEASE);
 		}
 	}
 
-	// Draw all the objects that still exist in the game.
-	@Override
-	public void paintComponent(Graphics g) {
+	// Handle all the keyboard and mouse events (including persistent events, IE: HELD).
+	// Also handle safely removing objects from the scene.
+	private void RunEvents() {
 
-		// Make a copy of the hashmap so that it is thread safe.
-		HashMap<Integer, KeyState> keyStates = downKeys.values();
+		Collection<GameObject> allObjects = gameobjects.values();
 
-		for (HashMap.Entry<Integer, KeyState> t_state : downKeys.entrySet()) {
+		// Handle keyboard events for all of the objects.
+		for (HashMap.Entry<Integer, KeyState> t_state : keyStates.entrySet()) {
 			int key = t_state.getKey();
-    	KeyState state = t_state.getValue();
+			KeyState state = t_state.getValue();
 			if (state == KeyState.KEYPRESS) {
-				for (GameObject obj : gameobjects.values()) {
+				for (GameObject obj : allObjects) {
 					obj.HandleKeyPress(key);
 				}
-				// Change concurrent state to held.
+				keyStates.replace(key, KeyState.KEYHELD);
 			}
 			else if (state == KeyState.KEYHELD) {
-				for (GameObject obj : gameobjects.values()) {
+				for (GameObject obj : allObjects) {
 					obj.HandleKeyDown(key);
 				}
 			}
 			else if (state == KeyState.KEYRELEASE) {
-				for (GameObject obj : gameobjects.values()) {
+				for (GameObject obj : allObjects) {
 					obj.HandleKeyRelease(key);
 				}
-				// Delete concurrent state.
+				keyStates.remove(key);
 			} else {
-				System.out.println('Error: Unknown Keystate');
+				System.out.println("Error: Unknown Keystate");
+			}
+		}
+
+		// Handle Mouse Events for all the objects
+		for (HashMap.Entry<Integer, MouseState> t_state : mouseStates.entrySet()) {
+			int key = t_state.getKey();
+			MouseState state = t_state.getValue();
+			if (state == MouseState.MOUSEPRESS) {
+				for (GameObject obj : allObjects) {
+					obj.HandleMousePress(key);
+				}
+				mouseStates.replace(key, MouseState.MOUSEHELD);
+			}
+			else if (state == MouseState.MOUSEHELD) {
+				for (GameObject obj : allObjects) {
+					obj.HandleMouseHeld(key);
+				}
+			}
+			else if (state == MouseState.MOUSERELEASE) {
+				for (GameObject obj : allObjects) {
+					obj.HandleMouseRelease(key);
+				}
+				mouseStates.remove(key);
+			} else {
+				System.out.println("Error: Unknown MouseState");
 			}
 		}
 
 		// Step every object and handle key events
-		for (GameObject obj : gameobjects.values()) {
+		for (GameObject obj : allObjects) {
 			obj.LogicStep();
 		}
 
 		// Remove every object flagged for deletion
 		ArrayList<Integer> deleteObjects = new ArrayList<Integer>();
-		for (GameObject obj : gameobjects.values()) {
+		for (GameObject obj : allObjects) {
 			if (obj.IsFlaggedDeleted()) {
 				deleteObjects.add(obj.id);
 			}
@@ -204,6 +239,13 @@ class GameLoop extends JComponent {
 			gameobjects.remove(key);
 		}
 		deleteObjects.clear();
+	}
+
+	// Draw all the objects that still exist in the game.
+	@Override
+	public void paintComponent(Graphics g) {
+		// Run all the events for every object.
+		RunEvents();
 
 		// Render the component
 		super.paintComponent(g);
@@ -221,5 +263,6 @@ class GameLoop extends JComponent {
 
   private int canvas_width, canvas_height;
 	private HashMap<Integer, GameObject> gameobjects;
-	private ConcurrentHashMap<Integer, KeyState> downKeys;
+	private ConcurrentHashMap<Integer, KeyState> keyStates;
+	private ConcurrentHashMap<Integer, MouseState> mouseStates;
 }

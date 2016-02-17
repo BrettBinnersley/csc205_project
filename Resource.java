@@ -2,6 +2,7 @@
 Brett Binnersley, V00776751
 
 Resource handler for all the resources.
+They should be safe to read from anywhere in the render loop.
 */
 
 import java.awt.image.BufferedImage;

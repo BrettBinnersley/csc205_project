@@ -33,9 +33,9 @@ class GameObject {
 	public void Render(Graphics2D canvas) {}
 
 	// Events - Optional to override everyone
-	public void HandleMouseUp(int x, int y, int btn) { }
-	public void HandleMouseDown(int x, int y, int btn) { }
-	public void HandleMouseMove(int x, int y) { }
+	public void HandleMousePress(int btn) { }
+	public void HandleMouseHeld(int btn) { }
+	public void HandleMouseRelease(int btn) { }
 	public void HandleKeyPress(int keyCode) { }  // Called when a key is pressed (single frame)
 	public void HandleKeyDown(int keyCode) { }  // Called when a key is held (every frame AFTER the first)
 	public void HandleKeyRelease(int keyCode) { }  // Called when a key is released.
