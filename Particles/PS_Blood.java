@@ -10,7 +10,7 @@ class PS_Blood extends ParticleSystem {
     int intx = (int)x;
     int inty = (int)y;
 
-    for (int i=0; i< 30; ++i) {
+    for (int i=0; i<50; ++i) {
       AddParticle(new Particle_Blood(intx, inty));
     }
   }

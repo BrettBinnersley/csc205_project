@@ -11,8 +11,8 @@ import java.awt.image.BufferedImage;
 class Particle {
   public int id;  // Used by the particle systems. Treat as READ ONLY
   public int life;  // Used by the particle system. Treat as READ ONLY
-  public int x;
-  public int y;
+  public double x;
+  public double y;
   public double rotation;
   public double speed;
   public int origin_x;
@@ -32,6 +32,6 @@ class Particle {
 
   public void Render(Graphics2D canvas) {
     canvas.rotate(rotation, x, y);
-    canvas.drawImage(image, x - origin_x, y - origin_y, null);
+    canvas.drawImage(image, (int)x - origin_x, (int)y - origin_y, null);
   };
 }
