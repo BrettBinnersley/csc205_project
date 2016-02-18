@@ -256,11 +256,11 @@ class GameLoop extends JComponent {
 				double o1l = obj1.x - obj1.coll_width;
 				double o1r = obj1.x + obj1.coll_width;
 				double o1t = obj1.y - obj1.coll_height;
-				double o1b = obj1.y - obj1.coll_height;
+				double o1b = obj1.y + obj1.coll_height;
 				double o2l = obj2.x - obj2.coll_width;
 				double o2r = obj2.x + obj2.coll_width;
 				double o2t = obj2.y - obj2.coll_height;
-				double o2b = obj2.y - obj2.coll_height;
+				double o2b = obj2.y + obj2.coll_height;
 				if (o1l < o2r && o1r > o2l && o1t < o2b && o1b > o2t) {
 					obj1.Collision(obj2);
 				}
