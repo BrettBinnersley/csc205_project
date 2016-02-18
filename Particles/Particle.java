@@ -4,6 +4,7 @@ Brett Binnersley, V00776751
 Dummy Template for any particle
 */
 
+import java.awt.AlphaComposite;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
@@ -15,6 +16,7 @@ class Particle {
   public double y;
   public double rotation;
   public double speed;
+  public float alpha;
   public int origin_x;
   public int origin_y;
   public BufferedImage image;
@@ -26,11 +28,14 @@ class Particle {
     image = Resources.GetImage(s_img);
     origin_x = s_origin_x;
     origin_y = s_origin_y;
+    alpha = 1.0f;
   }
 
   public void Step() { };   // Update particle properties
 
   public void Render(Graphics2D canvas) {
+    AlphaComposite alcom = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, alpha);
+    canvas.setComposite(alcom);
     canvas.rotate(rotation, x, y);
     canvas.drawImage(image, (int)x - origin_x, (int)y - origin_y, null);
   };

@@ -10,6 +10,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.Color;
+import java.awt.Composite;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.event.ActionListener;
@@ -280,8 +281,10 @@ class GameLoop extends JComponent {
 		ArrayList<GameObject> sorted = Scene.GetSortedObjects();
 		for (GameObject obj : sorted) {
 			AffineTransform trans = g2d.getTransform();  // Get current transform state.
+			Composite comp = g2d.getComposite();
 			obj.Render(g2d);
 			g2d.setTransform(trans);  // Reset transformation state.
+			g2d.setComposite(comp);  //reset the composite
 		}
 	}
 

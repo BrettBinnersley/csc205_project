@@ -10,9 +10,10 @@ import java.awt.image.BufferedImage;
 
 class Particle_Blood extends Particle {
   public Particle_Blood(int s_x, int s_y) {
-    super(s_x, s_y, 120, "person", 40, 40);
+    super(s_x, s_y, 120 + (int)(Math.random() * 100.0), "person", 40, 40);
     rotation = Math.random() * 2.0 * 3.141;  // 2PI radians in circle
     speed = 0.5 + Math.random();
+    alpha = 0.2f;
   }
 
   @Override
