@@ -17,7 +17,7 @@ class Player extends GameObject {
     SetSolid(16, 16);
     SetType(OBJECTTYPE.PLAYER);
     moveSpeed = 3.0;
-    depth = -1;
+    depth = -10;
   }
 
   // Move using WADS or the ARROW keys
@@ -62,7 +62,8 @@ class Player extends GameObject {
 
   @Override
   public void HandleMousePress(int btn) {
-    System.out.println(btn);
+    Bullet bullet = new Bullet((int)x, (int)y, rotation);
+    Scene.AddObject(bullet);
   }
 
   // Render a player

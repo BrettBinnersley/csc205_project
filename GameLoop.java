@@ -60,8 +60,8 @@ class GameLoop extends JComponent {
 		mouseStates = new ConcurrentHashMap<Integer, MouseState>();
 
 		// Initalize Scene and fill with the basic example.
-		Scene.Initialize();
-		ArrayList<GameObject> sceneObjects =  SceneCreator.CreateSimpleScene(1024, 768);
+		Scene.Initialize(1024, 768);  // Scene dimensions can be different than the canvases
+		ArrayList<GameObject> sceneObjects =  SceneCreator.CreateSimpleScene();
 		Scene.AddObjects(sceneObjects);		// Add all the objects to the scene
 		Scene.AddQueuedObjectsToScene();  // Immediate after first load
 

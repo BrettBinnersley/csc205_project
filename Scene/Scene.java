@@ -1,7 +1,10 @@
-/* Scene Creator
+/* Scene
 Brett Binnersley, V00776751
 
-Creates and returns scenes (sets of objects).
+Contains all the objects in the scene at any given time,
+and maintains their states. Objects can be added to the
+Scene with Scene.AddObject(...). Objects will automatically
+be removed and handled when their Destroy() method is invoked.
 */
 
 
@@ -11,13 +14,23 @@ import java.util.Collections;
 import java.util.HashMap;
 
 class Scene {
-  public static void Initialize() {
+  public static void Initialize(int s_width, int s_height) {
     if (objects == null) {
       objects = new HashMap<Integer, GameObject>();
       objectsToBeAdded = new ArrayList<GameObject>();
     } else {
       System.out.println("Warning: Scene has already been initialized.");
     }
+    width = s_width;
+    height = s_height;
+  }
+
+  public static int Width() {
+    return width;
+  }
+
+  public static int Height() {
+    return height;
   }
 
   public static void AddObject(GameObject obj) {
@@ -29,7 +42,6 @@ class Scene {
       objectsToBeAdded.add(obj);
     }
   }
-
 
   public static void AddQueuedObjectsToScene() {
     for (GameObject o : objectsToBeAdded) {
@@ -64,5 +76,7 @@ class Scene {
 
   private static HashMap<Integer, GameObject> objects;
   private static ArrayList<GameObject> objectsToBeAdded;
+  private static int width;
+  private static int height;
 
 }

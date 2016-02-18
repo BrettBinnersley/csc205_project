@@ -23,7 +23,6 @@ class Enemy extends GameObject {
   @Override
   public void Collision(GameObject other) {
     if (other.type == OBJECTTYPE.BULLET) {
-      System.out.println("Collide");
       Destroy();
     }
   }
