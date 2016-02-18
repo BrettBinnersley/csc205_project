@@ -11,6 +11,7 @@ class Enemy extends GameObject {
   public Enemy(int s_x, int s_y) {
     super(s_x, s_y);
     SetSolid(16, 16);
+    SetType(OBJECTTYPE.ENEMY);
   }
 
   @Override
@@ -21,8 +22,10 @@ class Enemy extends GameObject {
 
   @Override
   public void Collision(GameObject other) {
-    System.out.println("Collide");
-    Destroy();
+    if (other.type == OBJECTTYPE.BULLET) {
+      System.out.println("Collide");
+      Destroy();
+    }
   }
 
   // Render a player
@@ -31,4 +34,7 @@ class Enemy extends GameObject {
     canvas.setColor(new Color(255, 0, 0));
     canvas.fillOval((int)x - 20, (int)y - 20, 40, 40);
   }
+
+  private int targetX;
+  private int targetY;
 }

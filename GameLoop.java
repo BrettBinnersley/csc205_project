@@ -56,13 +56,14 @@ class GameLoop extends JComponent {
 		setSize(width, height);
 
 		// Create environment
-		gameobjects = new HashMap<Integer, GameObject>();
 		keyStates = new ConcurrentHashMap<Integer, KeyState>();
 		mouseStates = new ConcurrentHashMap<Integer, MouseState>();
-		ArrayList<GameObject> objects = SceneCreator.Create(width, height);
-		for (GameObject o : objects) {
-			gameobjects.put(o.id, o);
-		}
+
+		// Initalize Scene and fill with the basic example.
+		Scene.Initialize();
+		ArrayList<GameObject> sceneObjects =  SceneCreator.CreateSimpleScene(1024, 768);
+		Scene.AddObjects(sceneObjects);		// Add all the objects to the scene
+		Scene.AddQueuedObjectsToScene();  // Immediate after first load
 
 		// Mouse Events
 		addMouseListener(new MouseAdapter() {
@@ -175,7 +176,7 @@ class GameLoop extends JComponent {
 	// Also handle safely removing objects from the scene.
 	private void RunEvents() {
 
-		Collection<GameObject> allObjects = gameobjects.values();
+		Collection<GameObject> allObjects = Scene.GetUnorderedObjects();
 
 		// Handle keyboard events for all of the objects.
 		for (HashMap.Entry<Integer, KeyState> t_state : keyStates.entrySet()) {
@@ -272,38 +273,17 @@ class GameLoop extends JComponent {
 			obj.x_prev = obj.x;
 			obj.y_prev = obj.y;
 		}
-
-		// Remove every object flagged for deletion
-		ArrayList<Integer> deleteObjects = new ArrayList<Integer>();
-		for (GameObject obj : allObjects) {
-			if (obj.IsFlaggedDeleted()) {
-				deleteObjects.add(obj.id);
-				obj.OnDestroyed();
-			}
-		}
-		for (Integer key : deleteObjects) {
-			gameobjects.remove(key);
-		}
-		deleteObjects.clear();
 	}
 
-	// Draw all the objects that still exist in the game.
-	@Override
-	public void paintComponent(Graphics g) {
-		// Run all the events for every object.
-		RunEvents();
-
+	private void RenderAllObjects(Graphics g) {
 		// Render the background
 		super.paintComponent(g);
 		Graphics2D g2d = (Graphics2D)g;
 		g2d.setColor(new Color(128,128,128));
 		g2d.fillRect(0, 0, canvas_width, canvas_height);
 
-		// Extract references to all the objects, and sort them by depth
-		ArrayList<GameObject> sorted = new ArrayList<GameObject>(gameobjects.values());
-		Collections.sort(sorted);
-
 		// Render the objects in the correct depth order
+		ArrayList<GameObject> sorted = Scene.GetSortedObjects();
 		for (GameObject obj : sorted) {
 			AffineTransform trans = g2d.getTransform();  // Get current transform state.
 			obj.Render(g2d);
@@ -311,12 +291,21 @@ class GameLoop extends JComponent {
 		}
 	}
 
+	// Draw all the objects that still exist in the game.
+	@Override
+	public void paintComponent(Graphics g) {
+		RunEvents();									// Run all the events for every object.
+		Scene.RemoveFlaggedObjects();   // Remove all flagged objects (from events)
+		RenderAllObjects(g);				    // Render Everything
+		Scene.AddQueuedObjectsToScene();  // Add newly created objects after render (from the scene)
+	}
+
 	public void RunLogicDrawEntities(double frame_delta_ms) {
 		repaint();
 	}
 
   private int canvas_width, canvas_height;
-	private HashMap<Integer, GameObject> gameobjects;
+	private Scene scene;
 	private ConcurrentHashMap<Integer, KeyState> keyStates;
 	private ConcurrentHashMap<Integer, MouseState> mouseStates;
 }

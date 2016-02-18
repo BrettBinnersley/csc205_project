@@ -15,6 +15,7 @@ class Player extends GameObject {
     super(s_x, s_y);
     SetImage("person", 39, 39);
     SetSolid(16, 16);
+    SetType(OBJECTTYPE.PLAYER);
     moveSpeed = 3.0;
     depth = -1;
   }
@@ -53,9 +54,15 @@ class Player extends GameObject {
     }
   }
 
+  // Set player rotation
   @Override
   public void LogicStep() {
     rotation = Math.atan2(Mouse.Y() - y, Mouse.X() - x);
+  }
+
+  @Override
+  public void HandleMousePress(int btn) {
+    System.out.println(btn);
   }
 
   // Render a player

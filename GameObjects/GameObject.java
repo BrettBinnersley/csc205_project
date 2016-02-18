@@ -17,7 +17,8 @@ class GameObject implements Comparable<GameObject> {
 		UNKNOWN,
 		PLAYER,
 		ENEMY,
-		BULLET
+		BULLET,
+		BACKGROUND
 	}
 
 	// Constructor / Destructor. Should be invoked with super (...) from the Constructor
@@ -32,6 +33,7 @@ class GameObject implements Comparable<GameObject> {
 		flaggedDelete = false;
 		image = null;
 		solid = false;
+		type = OBJECTTYPE.UNKNOWN;
 	}
 
 	public void SetImage(String s_image, int o_x, int o_y) {
@@ -49,6 +51,10 @@ class GameObject implements Comparable<GameObject> {
 		solid = true;
 		coll_width = width;
 		coll_height = height;
+	}
+
+	public void SetType(OBJECTTYPE s_type) {
+		type = s_type;
 	}
 
 	// Flag this object to be destroyed, and delete it in the destroy object phase.
@@ -89,6 +95,7 @@ class GameObject implements Comparable<GameObject> {
 
 	// Variables.
   public int id;  // Unique Identifier for this object - automatically set.
+	public OBJECTTYPE type;  // Different for every object.
 	public int depth; // Depth of this object.
 	public double x;  // X position in the scene
   public double y;  // Y position in the scene

@@ -13,6 +13,7 @@ class Background extends GameObject {
   public Background(int width, int height) {
     super(0, 0);
     SetImage("background", 0, 0);
+    SetType(OBJECTTYPE.BACKGROUND);
     depth = 1000;
     scene_width = width;
     scene_height = height;
