@@ -14,6 +14,7 @@ class Particle {
   public int x;
   public int y;
   public double rotation;
+  public double speed;
   public int origin_x;
   public int origin_y;
   public BufferedImage image;
