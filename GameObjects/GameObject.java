@@ -13,7 +13,15 @@ import java.awt.image.BufferedImage;
 
 class GameObject implements Comparable<GameObject> {
 
-	// Constructor / Destructor
+	public enum OBJECTTYPE {
+		UNKNOWN,
+		PLAYER,
+		ENEMY,
+		BULLET
+	}
+
+	// Constructor / Destructor. Should be invoked with super (...) from the Constructor
+	// of any object that implements this interface.
 	public GameObject(int s_x, int s_y) {
 		x = (double)s_x;
 		y = (double)s_y;
@@ -23,6 +31,7 @@ class GameObject implements Comparable<GameObject> {
 		id = ID.GenID();
 		flaggedDelete = false;
 		image = null;
+		solid = false;
 	}
 
 	public void SetImage(String s_image, int o_x, int o_y) {
@@ -33,6 +42,13 @@ class GameObject implements Comparable<GameObject> {
 		}
 		origin_x = o_x;
 		origin_y = o_y;
+	}
+
+	// Create a bounding box around this object (around its origin)
+	public void SetSolid(double width, double height) {
+		solid = true;
+		coll_width = width;
+		coll_height = height;
 	}
 
 	// Flag this object to be destroyed, and delete it in the destroy object phase.
@@ -47,6 +63,17 @@ class GameObject implements Comparable<GameObject> {
 	public boolean IsFlaggedDeleted() {
 		return flaggedDelete;
 	}
+
+
+	/*
+	SAFELY OVERRIDE ANY OF THE METHODS BELOW.
+	*/
+
+	// Simulated destructor
+	public void OnDestroyed() { }
+
+	// Collision event with any other gameobject.
+	public void Collision(GameObject other) {	}
 
 	// Run one step for this object
 	public void LogicStep() {}
@@ -65,12 +92,18 @@ class GameObject implements Comparable<GameObject> {
 	public int depth; // Depth of this object.
 	public double x;  // X position in the scene
   public double y;  // Y position in the scene
+	public double x_prev;  // Previous XPosition for this object
+	public double y_prev;  // Previous YPosition for this object
 	public double rotation;  // Rotation of this object (in radians).
 
 	// For rendering
 	public int origin_x;  // Origin (rotaiton point) for the image (pixel)
 	public int origin_y;  // Origin (rotaiton point) for the image (pixel)
 	public BufferedImage image;  // Image used for rendering. Optional - Can be null.
+	// Collision component (Must have an image)
+	public boolean solid;
+	public double coll_width;
+	public double coll_height;
 
 	// Private that every object contains.
 	private boolean flaggedDelete;

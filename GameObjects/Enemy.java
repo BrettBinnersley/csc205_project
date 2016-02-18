@@ -10,12 +10,19 @@ import java.awt.Graphics2D;
 class Enemy extends GameObject {
   public Enemy(int s_x, int s_y) {
     super(s_x, s_y);
+    SetSolid(16, 16);
   }
 
   @Override
   public void LogicStep() {
     x += -1.0 + Math.random() * 2;
     y += -1.0 + Math.random() * 2;
+  }
+
+  @Override
+  public void Collision(GameObject other) {
+    System.out.println("Collide");
+    Destroy();
   }
 
   // Render a player

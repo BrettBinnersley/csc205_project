@@ -14,6 +14,7 @@ class Player extends GameObject {
   public Player(int s_x, int s_y) {
     super(s_x, s_y);
     SetImage("person", 39, 39);
+    SetSolid(16, 16);
     moveSpeed = 3.0;
     depth = -1;
   }

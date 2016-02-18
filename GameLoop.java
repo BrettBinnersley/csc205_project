@@ -227,9 +227,50 @@ class GameLoop extends JComponent {
 			}
 		}
 
-		// Step every object and handle key events
+		// Step every object
 		for (GameObject obj : allObjects) {
 			obj.LogicStep();
+		}
+
+		// Find all the solid objects in the scene (ones that have a collision box)
+		ArrayList<GameObject> solidObjects = new ArrayList<GameObject>();
+		for (GameObject obj : allObjects) {
+			if (obj.solid) {
+				solidObjects.add(obj);
+			}
+		}
+
+		// Run collision logic for each object (after they have all stepped & moved)
+		for (GameObject obj1 : solidObjects) {
+			if (obj1.IsFlaggedDeleted()) {
+				continue;
+			}
+			for (GameObject obj2 : solidObjects) {
+				if (obj2.IsFlaggedDeleted()) {
+					continue;
+				}
+				if (obj1.id == obj2.id) {
+					continue;
+				}
+				// Test axis aligned bounding box (collisions)
+				double o1l = obj1.x - obj1.coll_width;
+				double o1r = obj1.x + obj1.coll_width;
+				double o1t = obj1.y - obj1.coll_height;
+				double o1b = obj1.y - obj1.coll_height;
+				double o2l = obj2.x - obj2.coll_width;
+				double o2r = obj2.x + obj2.coll_width;
+				double o2t = obj2.y - obj2.coll_height;
+				double o2b = obj2.y - obj2.coll_height;
+				if (o1l < o2r && o1r > o2l && o1t < o2b && o1b > o2t) {
+					obj1.Collision(obj2);
+				}
+			}
+		}
+
+		// Update all the object variables (end step ALL)
+		for (GameObject obj : allObjects) {
+			obj.x_prev = obj.x;
+			obj.y_prev = obj.y;
 		}
 
 		// Remove every object flagged for deletion
@@ -237,6 +278,7 @@ class GameLoop extends JComponent {
 		for (GameObject obj : allObjects) {
 			if (obj.IsFlaggedDeleted()) {
 				deleteObjects.add(obj.id);
+				obj.OnDestroyed();
 			}
 		}
 		for (Integer key : deleteObjects) {
