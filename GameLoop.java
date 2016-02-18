@@ -236,20 +236,14 @@ class GameLoop extends JComponent {
 		// Find all the solid objects in the scene (ones that have a collision box)
 		ArrayList<GameObject> solidObjects = new ArrayList<GameObject>();
 		for (GameObject obj : allObjects) {
-			if (obj.solid) {
+			if (obj.solid && !obj.IsFlaggedDeleted()) {
 				solidObjects.add(obj);
 			}
 		}
 
 		// Run collision logic for each object (after they have all stepped & moved)
 		for (GameObject obj1 : solidObjects) {
-			if (obj1.IsFlaggedDeleted()) {
-				continue;
-			}
 			for (GameObject obj2 : solidObjects) {
-				if (obj2.IsFlaggedDeleted()) {
-					continue;
-				}
 				if (obj1.id == obj2.id) {
 					continue;
 				}
