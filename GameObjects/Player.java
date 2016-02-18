@@ -13,8 +13,8 @@ class Player extends GameObject {
 
   public Player(int s_x, int s_y) {
     super(s_x, s_y);
-    SetImage("background", 128, 128);
-    moveSpeed = 2.0;
+    SetImage("person", 39, 39);
+    moveSpeed = 3.0;
     depth = -1;
   }
 
@@ -54,7 +54,7 @@ class Player extends GameObject {
 
   @Override
   public void LogicStep() {
-    rotation += 0.01;
+    rotation = Math.atan2(Mouse.Y() - y, Mouse.X() - x);
   }
 
   // Render a player
