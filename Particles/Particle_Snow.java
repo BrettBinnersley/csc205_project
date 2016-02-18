@@ -10,13 +10,19 @@ import java.awt.image.BufferedImage;
 
 class Particle_Snow extends Particle {
   public Particle_Snow(int s_x, int s_y) {
-    super(s_x, s_y, 120, "person", 40, 40);
-    rotation = Math.random() * 2.0 * 3.141;  // 2PI radians in circle
-    speed = 0.2 + Math.random() * 0.2;
+    super(s_x, s_y, 200 + (int)(Math.random() * 100.0), "particle_snow", 40, 40);
+    rotation = 1.0 + Math.random() * 0.2;  // 2PI radians in circle
+    speed = 0.4 + Math.random() * 0.4;
+    alpha = (float)(0.4 + Math.random() * 0.3);
   }
 
   @Override
   public void Step() {
+    x += Math.cos(rotation) * speed;
+    y += Math.sin(rotation) * speed;
+    if (speed < 0) {
+      speed = 0.0;
+    }
   };
 
 }
