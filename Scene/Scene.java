@@ -47,6 +47,7 @@ class Scene {
     for (GameObject o : objectsToBeAdded) {
       objects.put(o.id, o);
     }
+    objectsToBeAdded.clear();
   }
 
   public static void RemoveFlaggedObjects() {

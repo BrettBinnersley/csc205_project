@@ -15,6 +15,13 @@ class Enemy extends GameObject {
   }
 
   @Override
+  public void OnDestroyed() {
+    // System.out.println(x);
+    // System.out.println(y);
+    Scene.AddObject(new PS_Blood(x, y));  // Create a blood splat at this objects death position
+  }
+
+  @Override
   public void LogicStep() {
     x += -1.0 + Math.random() * 2;
     y += -1.0 + Math.random() * 2;
