@@ -58,6 +58,18 @@ class Player extends GameObject {
   @Override
   public void LogicStep() {
     rotation = Math.atan2(Mouse.Y() - y, Mouse.X() - x);
+    if (x < 0) {
+      x = 0;
+    }
+    if (y < 0) {
+      y = 0;
+    }
+    if (x > Scene.Width()) {
+      x = Scene.Width();
+    }
+    if (y > Scene.Height()) {
+      y = Scene.Height();
+    }
   }
 
   @Override

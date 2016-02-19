@@ -18,6 +18,10 @@ class Scene {
     if (objects == null) {
       objects = new HashMap<Integer, GameObject>();
       objectsToBeAdded = new ArrayList<GameObject>();
+      objectTypeCount = new HashMap<GameObject.OBJECTTYPE, Integer>();
+      for (GameObject.OBJECTTYPE val : GameObject.OBJECTTYPE.values()) {
+        objectTypeCount.put(val, 0);
+      }
     } else {
       System.out.println("Warning: Scene has already been initialized.");
     }
@@ -45,6 +49,7 @@ class Scene {
 
   public static void AddQueuedObjectsToScene() {
     for (GameObject o : objectsToBeAdded) {
+      objectTypeCount.put(o.type, objectTypeCount.get(o.type) + 1);
       objects.put(o.id, o);
     }
     objectsToBeAdded.clear();
@@ -56,6 +61,7 @@ class Scene {
 		for (GameObject obj : unorderedObjs) {
 			if (obj.IsFlaggedDeleted()) {
 				deleteObjects.add(obj.id);
+        objectTypeCount.put(obj.type, objectTypeCount.get(obj.type) - 1);
 				obj.OnDestroyed();
 			}
 		}
@@ -75,7 +81,12 @@ class Scene {
     return sorted;
   }
 
+  public static int GetNumberObjectType(GameObject.OBJECTTYPE objType) {
+    return objectTypeCount.get(objType);
+  }
+
   private static HashMap<Integer, GameObject> objects;
+  private static HashMap<GameObject.OBJECTTYPE, Integer> objectTypeCount;
   private static ArrayList<GameObject> objectsToBeAdded;
   private static int width;
   private static int height;

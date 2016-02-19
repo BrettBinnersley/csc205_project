@@ -5,7 +5,7 @@ Brett Binnersley, V00776751, Uvic
 This is a very simple top down shooter game.
 
 To run:
-javac *.java Scene/*.java GameObjects/*.java -d bin
+javac *.java Scene/*.java GameObjects/*.java Scene/*.java -d bin
 cd bin
 java Start
 
@@ -19,9 +19,12 @@ https://github.com/BrettBinnersley/csc205_a2
 
 Features added:
 Dynamically create & destroy objects (using polymorphism)
+Rotations!
+Dynamic Collision System.
+Depths for the objects (render order)
+Particle Systems (Simple - but working)
+
 Framerate limiter (set to 60 in the constants)
 Thread-safe event system. (Using concurrent data structures)
 Dynamically (automatically) load all the resources (images) from the /resource folder.
-Rotations!
-Depths for the objects (render order)
-Particle Systems (Simple - but working)
+Graceful error handling and program exiting.

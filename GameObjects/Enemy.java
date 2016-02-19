@@ -17,10 +17,11 @@ class Enemy extends GameObject {
 
   @Override
   public void OnDestroyed() {
-    // System.out.println(x);
-    // System.out.println(y);
-    Scene.AddObject(new PS_Blood(x, y));  // Create a blood splat at this objects death position
-    GameLoop.EndGame();
+    Scene.AddObject(new PS_Blood(x, y));
+
+    if (Scene.GetNumberObjectType(OBJECTTYPE.ENEMY) == 0) {
+      GameLoop.EndGame();
+    }
   }
 
   @Override
