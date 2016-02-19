@@ -36,6 +36,9 @@ class ParticleSystem extends GameObject {
     for (Particle particle : parts) {
       particle.Step();
       particle.life -= 1;
+      if (particle.alpha < 0.0f) {
+        particle.alpha = 0.0f;
+      }
       if (particle.life <=0 ) {
         removeParticles.add(particle.id);
       }

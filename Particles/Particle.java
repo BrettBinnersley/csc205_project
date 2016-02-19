@@ -33,6 +33,10 @@ class Particle {
 
   public void Step() { };   // Update particle properties
 
+  public void Destroy() {
+    life = 0;
+  }
+
   public void Render(Graphics2D canvas) {
     AlphaComposite alcom = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, alpha);
     canvas.setComposite(alcom);

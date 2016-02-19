@@ -24,3 +24,4 @@ Thread-safe event system. (Using concurrent data structures)
 Dynamically (automatically) load all the resources (images) from the /resource folder.
 Rotations!
 Depths for the objects (render order)
+Particle Systems (Simple - but working)

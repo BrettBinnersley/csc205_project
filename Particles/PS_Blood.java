@@ -6,7 +6,7 @@ Particle System representing a blood splatter.
 
 class PS_Blood extends ParticleSystem {
   public PS_Blood(double x, double y) {
-    super((int)x, (int)y, -2);
+    super((int)x, (int)y, 2);
     int intx = (int)x;
     int inty = (int)y;
 

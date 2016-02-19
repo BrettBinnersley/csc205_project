@@ -12,6 +12,7 @@ class Enemy extends GameObject {
     super(s_x, s_y);
     SetSolid(16, 16);
     SetType(OBJECTTYPE.ENEMY);
+    ResetTarget();
   }
 
   @Override
@@ -19,12 +20,21 @@ class Enemy extends GameObject {
     // System.out.println(x);
     // System.out.println(y);
     Scene.AddObject(new PS_Blood(x, y));  // Create a blood splat at this objects death position
+    GameLoop.EndGame();
   }
 
   @Override
   public void LogicStep() {
-    x += -1.0 + Math.random() * 2;
-    y += -1.0 + Math.random() * 2;
+    double dir = Math.atan2(targetY - y, targetX - x);
+    x += Math.cos(dir) * 3.0;
+    y += Math.sin(dir) * 3.0;
+    double diffx = targetX - x;
+    double diffy = targetY - y;
+    while (Math.sqrt(diffx * diffx + diffy * diffy) < 10.0f) {
+      ResetTarget();
+      diffx = targetX - x;
+      diffy = targetY - y;
+    }
   }
 
   @Override
@@ -41,6 +51,12 @@ class Enemy extends GameObject {
     canvas.fillOval((int)x - 20, (int)y - 20, 40, 40);
   }
 
-  private int targetX;
-  private int targetY;
+  // Set target for this object to walk towards.
+  private void ResetTarget() {
+    targetX = Math.random() * (double)Scene.Width();
+    targetY = Math.random() * (double)Scene.Height();
+  }
+
+  private double targetX;
+  private double targetY;
 }

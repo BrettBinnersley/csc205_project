@@ -10,6 +10,7 @@
 
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import java.util.ArrayList;
 import java.awt.BorderLayout;
 
@@ -72,11 +73,17 @@ public class Start {
 			// Update the last time.
 			last_frame = now_time;
 
-			// Sleep (Zzz) time. This saves the CPU from killing itself.
-			try {
-				Thread.sleep(sleepTime);
-			} catch (Exception e) {
-				System.out.println("Interrupted Exception");
+			if (GameLoop.GameHasEnded()) {
+				JOptionPane.showMessageDialog(null, "Congrats! You have destroyed all the enemies. Click 'Ok' to exit the program.");
+				System.exit(0);
+				break;
+			} else {
+				// Sleep (Zzz) time. This saves the CPU from killing itself.
+				try {
+					Thread.sleep(sleepTime);
+				} catch (Exception e) {
+					System.out.println("Interrupted Exception");
+				}
 			}
 		}
 	}

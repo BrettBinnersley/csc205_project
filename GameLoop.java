@@ -55,6 +55,7 @@ class GameLoop extends JComponent {
 		canvas_height = height;
 		setDoubleBuffered(true);
 		setSize(width, height);
+		gameHasEnded = false;
 
 		// Create environment
 		keyStates = new ConcurrentHashMap<Integer, KeyState>();
@@ -301,8 +302,17 @@ class GameLoop extends JComponent {
 		repaint();
 	}
 
+	public static boolean GameHasEnded() {
+		return gameHasEnded;
+	}
+
+	public static void EndGame() {
+		gameHasEnded = true;
+	}
+
   private int canvas_width, canvas_height;
 	private Scene scene;
+	private static boolean gameHasEnded;
 	private ConcurrentHashMap<Integer, KeyState> keyStates;
 	private ConcurrentHashMap<Integer, MouseState> mouseStates;
 }
