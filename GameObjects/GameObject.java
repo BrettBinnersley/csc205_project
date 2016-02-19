@@ -27,6 +27,8 @@ class GameObject implements Comparable<GameObject> {
 	public GameObject(int s_x, int s_y) {
 		x = (double)s_x;
 		y = (double)s_y;
+		x_prev = x;
+		y_prev = y;
 		origin_x = 0;
 		origin_y = 0;
 		depth = 0;

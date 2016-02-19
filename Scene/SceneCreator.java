@@ -8,14 +8,14 @@ import java.util.ArrayList;
 
 class SceneCreator {
   public static ArrayList<GameObject> CreateSimpleScene() {
-    double scene_width = (double)Scene.Width();
-    double scene_height = (double)Scene.Height();
+    double scene_width = (double)(Scene.Width() - 2);
+    double scene_height = (double)(Scene.Height() - 2);
     ArrayList<GameObject> objects = new ArrayList<GameObject>();
     objects.add(new Background((int)scene_width, (int)scene_height));
     objects.add(new PS_Snow());
     objects.add(new Player(200, 200));
     for (int i=0; i<10; ++i) {
-      objects.add(new Enemy((int)(Math.random() * scene_width), (int)(Math.random() * scene_height)));
+      objects.add(new Enemy(1 + (int)(Math.random() * scene_width), 1 + (int)(Math.random() * scene_height)));
     }
     return objects;
   }

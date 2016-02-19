@@ -10,7 +10,7 @@ import java.awt.Graphics2D;
 class Enemy extends GameObject {
   public Enemy(int s_x, int s_y) {
     super(s_x, s_y);
-    SetSolid(16, 16);
+    SetSolid(18, 18);
     SetType(OBJECTTYPE.ENEMY);
     ResetTarget();
   }
@@ -42,6 +42,11 @@ class Enemy extends GameObject {
   public void Collision(GameObject other) {
     if (other.type == OBJECTTYPE.BULLET) {
       Destroy();
+    }
+    if (other.type == OBJECTTYPE.ENEMY) {
+      x = x_prev;
+      y = y_prev;
+      ResetTarget();
     }
   }
 

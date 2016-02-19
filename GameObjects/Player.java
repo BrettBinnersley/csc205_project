@@ -18,6 +18,13 @@ class Player extends GameObject {
     SetType(OBJECTTYPE.PLAYER);
     moveSpeed = 3.0;
     depth = -10;
+    footprintSystem = new PS_Footprint();
+    Scene.AddObject(footprintSystem);
+  }
+
+  @Override
+  public void OnDestroyed() {
+    footprintSystem.Destroy();
   }
 
   // Move using WADS or the ARROW keys
@@ -70,6 +77,9 @@ class Player extends GameObject {
     if (y > Scene.Height()) {
       y = Scene.Height();
     }
+    footprintSystem.rotation = rotation;
+    footprintSystem.x = x;
+    footprintSystem.y = y;
   }
 
   @Override
@@ -88,4 +98,5 @@ class Player extends GameObject {
   }
 
   private double moveSpeed;
+  private PS_Footprint footprintSystem;
 }

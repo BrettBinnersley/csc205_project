@@ -1,12 +1,8 @@
 /* Particle
 Brett Binnersley, V00776751
 
-Dummy Template for any particle
+Template for what a bullet hits a wall
 */
-
-import java.awt.Color;
-import java.awt.Graphics2D;
-import java.awt.image.BufferedImage;
 
 class Particle_Spark extends Particle {
   public Particle_Spark(int s_x, int s_y) {

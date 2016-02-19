@@ -1,12 +1,8 @@
 /* Particle
 Brett Binnersley, V00776751
 
-Dummy Template for any particle
+Particle for the snow effect
 */
-
-import java.awt.Color;
-import java.awt.Graphics2D;
-import java.awt.image.BufferedImage;
 
 class Particle_Snow extends Particle {
   public Particle_Snow(int s_x, int s_y) {
