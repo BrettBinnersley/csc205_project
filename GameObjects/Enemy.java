@@ -43,7 +43,9 @@ class Enemy extends GameObject {
     if (other.type == OBJECTTYPE.BULLET) {
       Destroy();
     }
-    if (other.type == OBJECTTYPE.ENEMY) {
+    if (other.type == OBJECTTYPE.ENEMY ||
+        other.type == OBJECTTYPE.PLAYER ||
+        other.type == OBJECTTYPE.WALL) {
       x = x_prev;
       y = y_prev;
       ResetTarget();

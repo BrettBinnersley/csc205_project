@@ -61,6 +61,15 @@ class Player extends GameObject {
     }
   }
 
+  @Override
+  public void Collision(GameObject other) {
+    if (other.type == OBJECTTYPE.ENEMY ||
+        other.type == OBJECTTYPE.WALL) {
+      x = x_prev;
+      y = y_prev;
+    }
+  }
+
   // Set player rotation
   @Override
   public void LogicStep() {

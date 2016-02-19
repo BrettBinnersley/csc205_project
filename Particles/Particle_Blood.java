@@ -19,7 +19,7 @@ class Particle_Blood extends Particle {
     y += Math.sin(move_rot) * speed;
     speed *= 0.9;
     speed -= 0.05;
-    alpha -= 0.001;
+    alpha -= 0.01f;
     if (speed < 0) {
       speed = 0.0;
     }

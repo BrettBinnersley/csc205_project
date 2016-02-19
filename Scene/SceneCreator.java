@@ -13,9 +13,15 @@ class SceneCreator {
     ArrayList<GameObject> objects = new ArrayList<GameObject>();
     objects.add(new Background((int)scene_width, (int)scene_height));
     objects.add(new PS_Snow());
+    objects.add(new Wall());
     objects.add(new Player(200, 200));
+    double halfWidth = (double)(Scene.Width() / 2) - 30.0;
     for (int i=0; i<10; ++i) {
-      objects.add(new Enemy(1 + (int)(Math.random() * scene_width), 1 + (int)(Math.random() * scene_height)));
+      if (Math.random() > 0.5) {  // Create on left or right side of the wall.
+        objects.add(new Enemy(1 + (int)(Math.random() * halfWidth), 1 + (int)(Math.random() * scene_height)));
+      } else {
+        objects.add(new Enemy(Scene.Width() - 1 - (int)(Math.random() * halfWidth), 1 + (int)(Math.random() * scene_height)));
+      }
     }
     return objects;
   }

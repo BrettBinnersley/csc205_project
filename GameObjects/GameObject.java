@@ -17,6 +17,7 @@ class GameObject implements Comparable<GameObject> {
 		UNKNOWN,
 		PLAYER,
 		ENEMY,
+		WALL,
 		BULLET,
 		BACKGROUND,
 		PARTICLESYSTEM,
