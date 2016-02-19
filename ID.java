@@ -2,7 +2,6 @@
 Brett Binnersley, V00776751
 
 Generates and returns unique ID's as integers.
-NOT THREAD SAFE.
 */
 
 class ID {

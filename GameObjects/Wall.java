@@ -1,10 +1,10 @@
-/* Enemy
+/* Wall
 Brett Binnersley, V00776751
 
-Defines a simple ai controlled enemy
+Defines a static wall that is rendered in the
+center of the scene.
 */
 
-import java.awt.Color;
 import java.awt.Graphics2D;
 
 class Wall extends GameObject {

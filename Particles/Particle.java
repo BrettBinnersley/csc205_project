@@ -1,7 +1,8 @@
 /* Particle
 Brett Binnersley, V00776751
 
-Dummy Template for any particle
+Interface that every particle that can exist in any ParticleSystem.
+Every particle should Extend this base class.
 */
 
 import java.awt.AlphaComposite;

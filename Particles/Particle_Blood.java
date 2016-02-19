@@ -1,7 +1,7 @@
-/* Particle
+/* Particle_Blood
 Brett Binnersley, V00776751
 
-Particle for displaying blood of a dead enemy
+Particle for displaying blood of a dead enemy.
 */
 
 class Particle_Blood extends Particle {

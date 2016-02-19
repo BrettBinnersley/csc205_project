@@ -1,7 +1,8 @@
-/* Particle System.
+/* Particle System Blood.
 Brett Binnersley, V00776751
 
 Particle System representing a blood splatter.
+Created at the center of a destroyed enemy
 */
 
 class PS_Blood extends ParticleSystem {

@@ -1,7 +1,7 @@
-/* Enemy
+/* Bullet
 Brett Binnersley, V00776751
 
-Defines a simple ai controlled enemy
+Defines a bullet shot by the player.
 */
 
 import java.awt.Color;

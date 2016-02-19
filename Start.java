@@ -1,11 +1,10 @@
-/* TopDownShooter.java
+/* Start
 
    Brett Binnersley
 	 Csc 205, Uvic
 	 V00776751
 
-	 This file is the entry point for the application. It starts the GameLoop, and
-	 Handles exiting the program gracefully.
+	 This file is the entry point for the application. It will start the game.
 */
 
 

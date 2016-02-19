@@ -1,7 +1,9 @@
-/* Particle
+/* Particle_Footprint
 Brett Binnersley, V00776751
 
-Particle that follows players
+Particle that follows players as he moves. It is
+orientated so that its rotation matches the players
+when this particle is created.
 */
 
 class Particle_FootPrint extends Particle {

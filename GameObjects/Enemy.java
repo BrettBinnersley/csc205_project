@@ -1,7 +1,11 @@
 /* Enemy
 Brett Binnersley, V00776751
 
-Defines a simple ai controlled enemy
+Defines a simple ai controlled enemy. The AI is simple.
+It randomly picks a point in the scene, and attempts to
+move towards it. If it collides with any other objects,
+it picks a different point and attempts to move towards
+that.
 */
 
 import java.awt.Color;

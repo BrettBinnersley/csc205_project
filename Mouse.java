@@ -2,7 +2,6 @@
 Brett Binnersley, V00776751
 
 Handle the mouse position.
-Thread-safe (enough).
 */
 
 class Mouse {

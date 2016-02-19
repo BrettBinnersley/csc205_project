@@ -4,7 +4,6 @@ Brett Binnersley, V00776751
 Resource handler for all the resources. This will automatically
 load all the resources (images) located in the resources/ folder
 and make them readily available for use.
-THREAD SAFE (read in before threads spawn, only used within a single thread)
 */
 
 import java.awt.image.BufferedImage;

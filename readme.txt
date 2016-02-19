@@ -1,8 +1,11 @@
 Csc205 (Introduction to 2D Graphics) Assignment #2
 Brett Binnersley, V00776751, Uvic
+License: MIT (see license)
 
+This is a very simple top down shooter game using a simple game engine
+that I wrote for the purposes of this 205 course. This is intended for
+learning purposes and is not recommended for use in any other applications.
 
-This is a very simple top down shooter game.
 
 To run:
 javac *.java Scene/*.java GameObjects/*.java Particles/*.java -d bin
@@ -26,7 +29,6 @@ Depths for the objects (render order).
 Particle Systems for optimized render speed.
 Transparent rendering of images.
 Rotations.
-
 Framerate limiter (set to 60 in the constants)
 Thread-safe event system. (Using concurrent data structures)
 Dynamically (automatically) load all the resources (images) from the /resource folder.

@@ -2,6 +2,7 @@
 Brett Binnersley, V00776751
 
 Defines the user controller player.
+To control: <WADS> or <ARROW KEYS>
 */
 
 import java.awt.event.KeyEvent;

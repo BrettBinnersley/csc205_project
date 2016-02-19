@@ -1,7 +1,8 @@
-/* GameLoop
+/* GameObject
 Brett Binnersley, V00776751
 
-Interface for all objects that we use.
+Interface for all objects that can exist in the scene
+at any given time.
 
 Base object that all other objects in the game extend.
 Extended objects can override any of the given methods

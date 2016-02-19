@@ -1,7 +1,7 @@
-/* Particle System.
+/* Particle System Snow.
 Brett Binnersley, V00776751
 
-Particle System representing a blood splatter.
+Particle System that contains all the snow particles.
 */
 
 class PS_Snow extends ParticleSystem {

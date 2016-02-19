@@ -1,11 +1,9 @@
-/* Player
+/* Background
 Brett Binnersley, V00776751
 
-Defines the user controller player.
+Renders the background of the scene (Grass)
 */
 
-import java.awt.event.KeyEvent;
-import java.awt.Color;
 import java.awt.Graphics2D;
 
 class Background extends GameObject {

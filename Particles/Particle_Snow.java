@@ -1,7 +1,7 @@
-/* Particle
+/* Particle_Snow
 Brett Binnersley, V00776751
 
-Particle for the snow effect
+Particle for the snow
 */
 
 class Particle_Snow extends Particle {

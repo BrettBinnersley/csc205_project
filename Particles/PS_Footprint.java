@@ -1,7 +1,7 @@
-/* Particle System.
+/* Particle System Footprint.
 Brett Binnersley, V00776751
 
-Particle System representing a blood splatter.
+Particle System holding footprints that follow the player.
 */
 
 class PS_Footprint extends ParticleSystem {

@@ -2,8 +2,8 @@
 Brett Binnersley, V00776751
 
 This file controls the main gameloop, performing all the events and the 'main' logic.
-It contains all the objects in the scene at any given time, and runs the events on them
-when they are issued.
+It controls all the events, and the scene. The scene in turn handles passing the events
+off to the objects contained within it.
 */
 
 import java.awt.Graphics;

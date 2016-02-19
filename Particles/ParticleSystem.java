@@ -1,7 +1,9 @@
 /* Particle System.
 Brett Binnersley, V00776751
 
-Interface for any particle system.
+Interface for any particle system. Any particle
+system that can exist in the scene should extend
+this object.
 */
 
 import java.awt.Color;
