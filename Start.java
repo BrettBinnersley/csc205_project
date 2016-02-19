@@ -32,7 +32,7 @@ public class Start {
 
 	private void Initialize(int width, int height) {
 		viewerWindow = new JFrame();
-		viewerWindow.setTitle("CSC 205 Game - FPS: ??");
+		viewerWindow.setTitle("CSC 205 Game - Brett Binnersley. V00776751");
 		viewerWindow.setBounds(100, 100, width, height + 25);  // magic number added from example. Left here.
 		viewerWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -62,7 +62,6 @@ public class Start {
 
 			// Run game logic
 			loop.RunLogicDrawEntities(frame_delta_ms);
-			viewerWindow.setTitle("CSC 205 Game - FPS: " + (int)(1000.0 / frame_delta_ms));
 
 			// Figure out render time.
 			long now_time = System.nanoTime();

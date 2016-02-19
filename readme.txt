@@ -19,10 +19,10 @@ https://github.com/BrettBinnersley/csc205_a2
 
 Features added:
 Dynamically create & destroy objects (using polymorphism)
-Rotations!
+Static & Dynamic Objects
 Dynamic Collision System.
-Depths for the objects (render order)
-Particle Systems (Simple - but working)
+Depths for the objects (render order). [Layering supported]
+Particle Systems for optimized render speed.
 
 Framerate limiter (set to 60 in the constants)
 Thread-safe event system. (Using concurrent data structures)
