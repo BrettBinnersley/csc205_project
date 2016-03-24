@@ -21,8 +21,10 @@ class MenuBackground extends GameObject {
   @Override
   public void Render(Graphics2D canvas) {
     // Randomly spawn enemys on the menu
-    if (Math.random() < 0.8) {
-      Scene.AddObject(new Enemy(1 + (int)(Math.random() * scene_width), 1 + (int)(Math.random() * scene_height)));
+    if (Math.random() < 0.1) {
+      Enemy e = new Enemy(1 + (int)(Math.random() * scene_width), 1 + (int)(Math.random() * scene_height));
+      e.depth = 1;
+      Scene.AddObject(e);
     }
 
     for (int y=0; y<scene_height; y+=256) {
