@@ -16,17 +16,23 @@ import java.util.HashMap;
 class Scene {
   public static void Initialize(int s_width, int s_height) {
     if (objects == null) {
-      objects = new HashMap<Integer, GameObject>();
-      objectsToBeAdded = new ArrayList<GameObject>();
-      objectTypeCount = new HashMap<GameObject.OBJECTTYPE, Integer>();
-      for (GameObject.OBJECTTYPE val : GameObject.OBJECTTYPE.values()) {
-        objectTypeCount.put(val, 0);
-      }
+      ClearSceneObjects();
     } else {
       System.out.println("Warning: Scene has already been initialized.");
     }
     width = s_width;
     height = s_height;
+  }
+
+  // Kill all the objects from the scene.
+  // This should only ever be called from the SceneManager
+  public static void ClearSceneObjects() {
+    objects = new HashMap<Integer, GameObject>();
+    objectsToBeAdded = new ArrayList<GameObject>();
+    objectTypeCount = new HashMap<GameObject.OBJECTTYPE, Integer>();
+    for (GameObject.OBJECTTYPE val : GameObject.OBJECTTYPE.values()) {
+      objectTypeCount.put(val, 0);
+    }
   }
 
   public static int Width() {

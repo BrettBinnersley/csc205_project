@@ -62,10 +62,7 @@ class GameLoop extends JComponent {
 		mouseStates = new ConcurrentHashMap<Integer, MouseState>();
 
 		// Initalize Scene and fill with the basic example.
-		Scene.Initialize(Constants.sceneWidth, Constants.sceneHeight);  // Scene dimensions can be different than the canvases
-		ArrayList<GameObject> sceneObjects =  SceneCreator.CreateSimpleScene();
-		Scene.AddObjects(sceneObjects);		// Add all the objects to the scene
-		Scene.AddQueuedObjectsToScene();  // Immediate after first load
+		SceneManager.Initialize("room1", Constants.sceneWidth, Constants.sceneHeight);  // Scene dimensions can be different than the canvases
 
 		// Mouse Events
 		addMouseListener(new MouseAdapter() {
@@ -177,7 +174,6 @@ class GameLoop extends JComponent {
 	// Handle all the keyboard and mouse events (including persistent events, IE: HELD).
 	// Also handle safely removing objects from the scene.
 	private void RunEvents() {
-
 		Collection<GameObject> allObjects = Scene.GetUnorderedObjects();
 
 		// Handle keyboard events for all of the objects.
@@ -292,10 +288,13 @@ class GameLoop extends JComponent {
 	// Draw all the objects that still exist in the game.
 	@Override
 	public void paintComponent(Graphics g) {
-		RunEvents();									// Run all the events for every object.
-		Scene.RemoveFlaggedObjects();   // Remove all flagged objects (from events)
-		RenderAllObjects(g);				    // Render Everything
-		Scene.AddQueuedObjectsToScene();  // Add newly created objects after render (from the scene)
+		RunEvents();									  // Run all the events for every object.
+    Scene.RemoveFlaggedObjects();   // Remove all flagged objects (from events)
+    RenderAllObjects(g);				    // Render Everything
+    if (!SceneManager.RunSceneChangeFromGameLoop()) {
+      // Scene didn't change. Add queued objects.
+  		Scene.AddQueuedObjectsToScene();  // Add newly created objects after render (from the scene)
+    }
 	}
 
 	public void RunLogicDrawEntities(double frame_delta_ms) {
@@ -311,7 +310,6 @@ class GameLoop extends JComponent {
 	}
 
   private int canvas_width, canvas_height;
-	private Scene scene;
 	private static boolean gameHasEnded;
 	private ConcurrentHashMap<Integer, KeyState> keyStates;
 	private ConcurrentHashMap<Integer, MouseState> mouseStates;
