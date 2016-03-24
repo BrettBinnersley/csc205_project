@@ -32,9 +32,13 @@ class Bullet extends GameObject {
   // Hit an enemy - stop the bullet
   @Override
   public void Collision(GameObject other) {
-    if (other.type == OBJECTTYPE.ENEMY ||
-        other.type == OBJECTTYPE.WALL) {
+    if (other.type == OBJECTTYPE.WALL) {
       Destroy();
+    }
+    if (other.type == OBJECTTYPE.ENEMY) {
+      if (other.id != ownerId) {
+        Destroy();
+      }
     }
   }
 

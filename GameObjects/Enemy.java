@@ -20,6 +20,7 @@ class Enemy extends GameObject {
     ResetTarget();
     footprintSystem = new PS_Footprint();
     Scene.AddObject(footprintSystem);
+    shootCooldown = 120;
   }
 
   @Override
@@ -44,9 +45,19 @@ class Enemy extends GameObject {
       diffx = targetX - x;
       diffy = targetY - y;
     }
+
+    // Place footprints!
     footprintSystem.rotation = rotation;
     footprintSystem.x = x;
     footprintSystem.y = y;
+
+    // Shoot a bullet
+    shootCooldown -= (int)(Math.random() * 4);
+    if (shootCooldown <= 0) {
+      Bullet bullet = new Bullet((int)x, (int)y, rotation, id);
+      Scene.AddObject(bullet);
+      shootCooldown = 120;
+    }
   }
 
   @Override
@@ -84,4 +95,5 @@ class Enemy extends GameObject {
   private double targetX;
   private double targetY;
   private PS_Footprint footprintSystem;
+  private int shootCooldown;
 }
