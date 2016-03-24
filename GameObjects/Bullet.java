@@ -8,13 +8,14 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 
 class Bullet extends GameObject {
-  public Bullet(int s_x, int s_y, double rot) {
+  public Bullet(int s_x, int s_y, double rot, int s_ownerId) {
     super(s_x, s_y);
     SetSolid(16, 16);
     SetType(OBJECTTYPE.BULLET);
     depth = -2;
     speed = 20.0;
     rotation = rot;
+    ownerId = s_ownerId;
   }
 
   @Override
@@ -45,4 +46,5 @@ class Bullet extends GameObject {
   }
 
   private double speed;
+  public int ownerId;  // Owner can not be killed by their own bullet
 }

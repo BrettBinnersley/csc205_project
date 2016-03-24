@@ -52,7 +52,9 @@ class Enemy extends GameObject {
   @Override
   public void Collision(GameObject other) {
     if (other.type == OBJECTTYPE.BULLET) {
-      Destroy();
+      if (((Bullet)other).ownerId != id) {
+        Destroy();
+      }
     }
     if (other.type == OBJECTTYPE.ENEMY ||
         other.type == OBJECTTYPE.PLAYER ||

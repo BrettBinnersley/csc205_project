@@ -94,7 +94,7 @@ class Player extends GameObject {
 
   @Override
   public void HandleMousePress(int btn) {
-    Bullet bullet = new Bullet((int)x, (int)y, rotation);
+    Bullet bullet = new Bullet((int)x, (int)y, rotation, id);
     Scene.AddObject(bullet);
   }
 
