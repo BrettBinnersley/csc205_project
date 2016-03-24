@@ -126,8 +126,13 @@ class GameObject implements Comparable<GameObject> {
 	public int compareTo(GameObject o) {
 		if (depth < o.depth) {
 			return 1;
-		} else {
+		}
+    if (depth > o.depth) {
 			return -1;
 		}
+    if (id > o.id) {
+      return 1;
+    }
+    return -1;
 	}
 }
