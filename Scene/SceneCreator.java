@@ -16,6 +16,9 @@ class SceneCreator {
     objects.add(new MenuPlay());
     objects.add(new MenuPS());
     objects.add(new MenuBackground());
+    for (int i=0; i<2; ++i) {
+      objects.add(new Enemy(1 + (int)(Math.random() * scene_width), 1 + (int)(Math.random() * scene_height)));
+    }
     return objects;
   }
 

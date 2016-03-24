@@ -27,9 +27,9 @@ class MenuText extends GameObject {
 
     int strHeight = metrics.getHeight();
     String messages[] = {
-      "Controls",
-      "Move: <WADS>",
-      "Shoot: <LMB>"
+      "Csc 205 Project!!!",
+      "Move WADS",
+      "Shoot LMB"
     };
 
     int drawX = Scene.Width() / 2;

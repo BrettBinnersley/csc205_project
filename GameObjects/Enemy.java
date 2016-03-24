@@ -15,12 +15,16 @@ class Enemy extends GameObject {
   public Enemy(int s_x, int s_y) {
     super(s_x, s_y);
     SetSolid(18, 18);
+    SetImage("person", 39, 39);
     SetType(OBJECTTYPE.ENEMY);
     ResetTarget();
+    footprintSystem = new PS_Footprint();
+    Scene.AddObject(footprintSystem);
   }
 
   @Override
   public void OnDestroyed() {
+    footprintSystem.DestroyWhenEmpty();
     Scene.AddObject(new PS_Blood(x, y));
 
     if (Scene.GetNumberObjectType(OBJECTTYPE.ENEMY) == 0) {
@@ -40,6 +44,9 @@ class Enemy extends GameObject {
       diffx = targetX - x;
       diffy = targetY - y;
     }
+    footprintSystem.rotation = rotation;
+    footprintSystem.x = x;
+    footprintSystem.y = y;
   }
 
   @Override
@@ -59,16 +66,20 @@ class Enemy extends GameObject {
   // Render a player
   @Override
   public void Render(Graphics2D canvas) {
-    canvas.setColor(new Color(255, 0, 0));
-    canvas.fillOval((int)x - 20, (int)y - 20, 40, 40);
+    // canvas.setColor(new Color(255, 0, 0));
+    // canvas.fillOval((int)x - 20, (int)y - 20, 40, 40);
+    canvas.rotate(rotation, x, y);
+    canvas.drawImage(image, (int)x - origin_x, (int)y - origin_y, null);
   }
 
   // Set target for this object to walk towards.
   private void ResetTarget() {
     targetX = Math.random() * (double)Scene.Width();
     targetY = Math.random() * (double)Scene.Height();
+    rotation = Math.atan2(targetY - y, targetX - x);
   }
 
   private double targetX;
   private double targetY;
+  private PS_Footprint footprintSystem;
 }

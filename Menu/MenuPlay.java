@@ -56,10 +56,10 @@ class MenuPlay extends GameObject {
     Color cback;
     if (MouseIsHovering()) {
       ctext = new Color(0, 255, 0);
-      cback = new Color(255, 0, 0);
+      cback = new Color(255, 0, 0, 120);
     } else {
       ctext = new Color(0, 0, 120);
-      cback = new Color(0, 255, 0);
+      cback = new Color(0, 255, 0, 120);
     }
     // Draw the things
     canvas.setColor(cback);

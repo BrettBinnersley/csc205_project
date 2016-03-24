@@ -21,6 +21,7 @@ class ParticleSystem extends GameObject {
     SetType(OBJECTTYPE.PARTICLESYSTEM);
     particles = new HashMap<Integer, Particle>();
     particleID = 0;
+    destroySelfWhenDone = false;
   }
 
   public void ParticleSystemStep() { }  // Override this
@@ -29,6 +30,10 @@ class ParticleSystem extends GameObject {
     particles.put(particleID, p);
     p.id = particleID;
     ++particleID;
+  }
+
+  public void DestroyWhenEmpty() {
+    destroySelfWhenDone = true;
   }
 
   @Override
@@ -48,7 +53,11 @@ class ParticleSystem extends GameObject {
     for (Integer key : removeParticles) {
       particles.remove(key);
     }
-    ParticleSystemStep();
+    if (destroySelfWhenDone == true && particles.isEmpty()) {
+      Destroy();
+    } else {
+      ParticleSystemStep();
+    }
   }
 
   @Override
@@ -63,4 +72,5 @@ class ParticleSystem extends GameObject {
 
   public HashMap<Integer, Particle> particles;
   private int particleID;
+  public boolean destroySelfWhenDone;
 }
