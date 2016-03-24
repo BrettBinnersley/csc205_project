@@ -7,6 +7,19 @@ Creates and returns scenes (sets of objects).
 import java.util.ArrayList;
 
 class SceneCreator {
+  // Menu
+  public static ArrayList<GameObject> CreateMenu() {
+    double scene_width = (double)(Scene.Width() - 2);
+    double scene_height = (double)(Scene.Height() - 2);
+    ArrayList<GameObject> objects = new ArrayList<GameObject>();
+    objects.add(new MenuText());
+    objects.add(new MenuPlay());
+    objects.add(new MenuPS());
+    objects.add(new MenuBackground());
+    return objects;
+  }
+
+  // First Room
   public static ArrayList<GameObject> CreateRoom1() {
     double scene_width = (double)(Scene.Width() - 2);
     double scene_height = (double)(Scene.Height() - 2);
@@ -26,6 +39,7 @@ class SceneCreator {
     return objects;
   }
 
+  // Second Room
   public static ArrayList<GameObject> CreateRoom2() {
     double scene_width = (double)(Scene.Width() - 2);
     double scene_height = (double)(Scene.Height() - 2);
@@ -42,15 +56,6 @@ class SceneCreator {
         objects.add(new Enemy(Scene.Width() - 1 - (int)(Math.random() * halfWidth), 1 + (int)(Math.random() * scene_height)));
       }
     }
-    return objects;
-  }
-
-  public static ArrayList<GameObject> CreateMenu() {
-    double scene_width = (double)(Scene.Width() - 2);
-    double scene_height = (double)(Scene.Height() - 2);
-    ArrayList<GameObject> objects = new ArrayList<GameObject>();
-    objects.add(new Background((int)scene_width, (int)scene_height));
-    objects.add(new Wall());
     return objects;
   }
 

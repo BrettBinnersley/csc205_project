@@ -6,15 +6,15 @@ Renders the background of the scene (Grass)
 
 import java.awt.Graphics2D;
 
-class Background extends GameObject {
+class MenuBackground extends GameObject {
 
-  public Background(int width, int height) {
+  public MenuBackground() {
     super(0, 0);
-    SetImage("background", 0, 0);
+    SetImage("menuBackground", 0, 0);
     SetType(OBJECTTYPE.BACKGROUND);
     depth = 1000;
-    scene_width = width;
-    scene_height = height;
+    scene_width = Scene.Width();
+    scene_height = Scene.Height();
   }
 
   // Render the background

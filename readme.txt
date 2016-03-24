@@ -8,7 +8,7 @@ https://github.com/BrettBinnersley/csc205_a2
 
 
 To run:
-javac *.java Scene/*.java GameObjects/*.java Particles/*.java -d bin
+javac *.java Scene/*.java GameObjects/*.java Particles/*.java Menu/*.java -d bin
 cd bin
 java Start
 
