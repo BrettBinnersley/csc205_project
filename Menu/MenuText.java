@@ -13,8 +13,7 @@ class MenuText extends GameObject {
 
   public MenuText() {
     super(0, 0);
-    SetImage("menuBackground", 0, 0);
-    SetType(OBJECTTYPE.BACKGROUND);
+    SetType(OBJECTTYPE.MENUITEM);
     depth = 0;
     font = new Font("Serif", Font.PLAIN, 96);
   }
@@ -42,7 +41,5 @@ class MenuText extends GameObject {
     }
   }
 
-  private int scene_width;
-  private int scene_height;
   private Font font;
 }
