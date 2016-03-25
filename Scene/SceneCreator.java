@@ -32,6 +32,7 @@ class SceneCreator {
     objects.add(new Background((int)scene_width, (int)scene_height));
     objects.add(new Sky((int)scene_width, (int)scene_height));
     objects.add(new PS_Snow());
+    objects.add(new HUD());
     objects.add(new Wall());
 
     // Follow the player in this scene.
