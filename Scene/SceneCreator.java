@@ -28,6 +28,7 @@ class SceneCreator {
     double scene_height = (double)(Scene.Height() - 2);
     ArrayList<GameObject> objects = new ArrayList<GameObject>();
     objects.add(new Background((int)scene_width, (int)scene_height));
+    objects.add(new Sky((int)scene_width, (int)scene_height));
     objects.add(new PS_Snow());
     objects.add(new Wall());
 
