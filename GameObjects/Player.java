@@ -69,6 +69,11 @@ class Player extends GameObject {
       x = x_prev;
       y = y_prev;
     }
+    if (other.type == OBJECTTYPE.BULLET) {
+      if (((Bullet)other).ownerId != id) {
+        Scene.AddObject(new PS_Blood(x, y));
+      }
+    }
   }
 
   // Set player rotation

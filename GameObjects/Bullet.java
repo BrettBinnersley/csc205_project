@@ -35,7 +35,7 @@ class Bullet extends GameObject {
     if (other.type == OBJECTTYPE.WALL) {
       Destroy();
     }
-    if (other.type == OBJECTTYPE.ENEMY) {
+    if (other.type == OBJECTTYPE.ENEMY || other.type == OBJECTTYPE.PLAYER) {
       if (other.id != ownerId) {
         Destroy();
       }

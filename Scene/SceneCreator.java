@@ -41,7 +41,7 @@ class SceneCreator {
 
     // Create the enemies
     double halfWidth = (double)(Scene.Width() / 2) - 30.0;
-    for (int i=0; i<1000; ++i) {
+    for (int i=0; i<20; ++i) {
       if (Math.random() > 0.5) {  // Create on left or right side of the wall.
         objects.add(new Enemy(1 + (int)(Math.random() * halfWidth), 1 + (int)(Math.random() * scene_height)));
       } else {
