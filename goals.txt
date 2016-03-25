@@ -1,0 +1,28 @@
+Gameplay:
+ - Multiple scenes (ie: Menu, Room1, Room2, Room3....)
+ - A smart AI that tries to defeat the player and other AI's.
+    - IE: Multiple NPC players that interact with each other AND everything in the scene.
+ - Well defined goal (story?)
+
+View:
+ - Scrolling View (IE: Scene is sized 2000x2000, and the view follows the player). I don't know how possible this is, but would like to look into it.
+
+Graphics:
+ - Transparency in images
+ - Color filters (Draw same image with different colors overlayed: IE: green enhanced)
+   - In 3D this can be done on a vertex shader. I have no idea how this is done with Graphics2D, but I would like to look into it.
+ - Advanced transformations (ie: image Skewing, Scaling, & multiple transformations applied)
+ - Improved Particle Systems
+
+Interaction:
+ - Bots interact with the player (AI).
+ - Limit number of bullets (Can pick up ammo?).
+ - Everything in the scene can be interacted with, with the exception of particles.
+
+Optimization:
+ - With scrolling view (above), not every object can run collisions against every other object (N^2, expensive with many objects). I hope to implement an NlogN solution, or an even quicker one using hashing.
+ - For the AI to interact with every object, optimizations need to be done (once again, probably using hashing to determine all the objects it can possibly interact with).
+ - Improve current game engine
+
+Sound:
+ - I know this isn't the goal of the course, but I would like to add sound to the game.
