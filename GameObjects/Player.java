@@ -73,6 +73,7 @@ class Player extends GameObject {
       if (((Bullet)other).ownerId != id) {
         Scene.AddObject(new PS_Blood(x, y));
         HUD.AddPlayerDamage(60);
+        Globals.playerHealth -= 10;
       }
     }
   }
