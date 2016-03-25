@@ -39,9 +39,11 @@ class Particle {
   }
 
   public void Render(Graphics2D canvas) {
+    int drawX = ViewPort.GetDrawX((int)x);
+    int drawY = ViewPort.GetDrawY((int)y);
     AlphaComposite alcom = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, alpha);
     canvas.setComposite(alcom);
-    canvas.rotate(rotation, x, y);
-    canvas.drawImage(image, (int)x - origin_x, (int)y - origin_y, null);
+    canvas.rotate(rotation, drawX, drawY);
+    canvas.drawImage(image, drawX - origin_x, drawY - origin_y, null);
   };
 }

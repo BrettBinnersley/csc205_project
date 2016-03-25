@@ -6,10 +6,10 @@ Handles a scrolling View
 
 class ViewPort {
 
-  public static int GetX(int x) {
+  public static int GetDrawX(int x) {
     return x - _x;
   }
-  public static int GetY(int y) {
+  public static int GetDrawY(int y) {
     return y - _y;
   }
 

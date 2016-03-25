@@ -264,8 +264,8 @@ class GameLoop extends JComponent {
 		for (GameObject obj : allObjects) {
 			obj.x_prev = obj.x;
 			obj.y_prev = obj.y;
-      obj.drawX = ViewPort.GetX((int)obj.x);
-      obj.drawY = ViewPort.GetY((int)obj.y);
+      obj.drawX = ViewPort.GetDrawX((int)obj.x);
+      obj.drawY = ViewPort.GetDrawY((int)obj.y);
 		}
 	}
 
