@@ -19,6 +19,7 @@ class ParticleSystem extends GameObject {
     super(x, y);
     depth = s_depth;
     SetType(OBJECTTYPE.PARTICLESYSTEM);
+    FlagNoClipDraw();
     particles = new HashMap<Integer, Particle>();
     particleID = 0;
     destroySelfWhenDone = false;

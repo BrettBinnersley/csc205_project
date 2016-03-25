@@ -42,6 +42,7 @@ class GameObject implements Comparable<GameObject> {
 		image = null;
 		solid = false;
 		type = OBJECTTYPE.UNKNOWN;
+    clipViewPort = true;
 	}
 
 	public void SetImage(String s_image, int o_x, int o_y) {
@@ -64,6 +65,10 @@ class GameObject implements Comparable<GameObject> {
 	public void SetType(OBJECTTYPE s_type) {
 		type = s_type;
 	}
+
+  public void FlagNoClipDraw() {
+    clipViewPort = false;
+  }
 
 	// Flag this object to be destroyed, and delete it in the destroy object phase.
 	public void Destroy() {
@@ -121,6 +126,7 @@ class GameObject implements Comparable<GameObject> {
 	public boolean solid;
 	public double coll_width;
 	public double coll_height;
+  public boolean clipViewPort;
 
 	// Private that every object contains.
 	private boolean flaggedDelete;

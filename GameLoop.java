@@ -62,7 +62,7 @@ class GameLoop extends JComponent {
 		mouseStates = new ConcurrentHashMap<Integer, MouseState>();
 
 		// Initalize Scene and fill with the basic example.
-		SceneManager.Initialize("menu", Constants.sceneWidth, Constants.sceneHeight);  // Scene dimensions can be different than the canvases
+		SceneManager.Initialize("menu");  // Scene dimensions can be different than the canvases
 
 		// Mouse Events
 		addMouseListener(new MouseAdapter() {
@@ -279,6 +279,10 @@ class GameLoop extends JComponent {
 		// Render the objects in the correct depth order
 		ArrayList<GameObject> sorted = Scene.GetSortedObjects();
 		for (GameObject obj : sorted) {
+      if (obj.clipViewPort && (obj.drawX < -256 || obj.drawY < -256 || obj.drawX > Constants.windowWidth + 256 ||
+          obj.drawY > Constants.windowHeight + 256)) {
+        continue;
+      }
 			AffineTransform trans = g2d.getTransform();  // Get current transform state.
 			Composite comp = g2d.getComposite();
 			obj.Render(g2d);

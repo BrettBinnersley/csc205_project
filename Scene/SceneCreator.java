@@ -9,8 +9,9 @@ import java.util.ArrayList;
 class SceneCreator {
   // Menu
   public static ArrayList<GameObject> CreateMenu() {
-    double scene_width = (double)(Scene.Width() - 2);
-    double scene_height = (double)(Scene.Height() - 2);
+    double scene_width = Constants.windowWidth;
+    double scene_height = Constants.windowHeight;
+    Scene.SetSize(scene_width, scene_height);
     ArrayList<GameObject> objects = new ArrayList<GameObject>();
     objects.add(new MenuText());
     objects.add(new MenuPlay());
@@ -24,8 +25,9 @@ class SceneCreator {
 
   // First Room
   public static ArrayList<GameObject> CreateRoom1() {
-    double scene_width = (double)(Scene.Width() - 2);
-    double scene_height = (double)(Scene.Height() - 2);
+    double scene_width = 2048;
+    double scene_height = 2048;
+    Scene.SetSize(scene_width, scene_height);
     ArrayList<GameObject> objects = new ArrayList<GameObject>();
     objects.add(new Background((int)scene_width, (int)scene_height));
     objects.add(new Sky((int)scene_width, (int)scene_height));
@@ -39,7 +41,7 @@ class SceneCreator {
 
     // Create the enemies
     double halfWidth = (double)(Scene.Width() / 2) - 30.0;
-    for (int i=0; i<10; ++i) {
+    for (int i=0; i<1000; ++i) {
       if (Math.random() > 0.5) {  // Create on left or right side of the wall.
         objects.add(new Enemy(1 + (int)(Math.random() * halfWidth), 1 + (int)(Math.random() * scene_height)));
       } else {

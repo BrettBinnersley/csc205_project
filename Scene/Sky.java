@@ -12,6 +12,7 @@ class Sky extends GameObject {
     super(0, 0);
     SetImage("sky", 0, 0);
     SetType(OBJECTTYPE.BACKGROUND);
+    FlagNoClipDraw();
     depth = 1001;
     scene_width = width + 20;
     scene_height = height + 20;

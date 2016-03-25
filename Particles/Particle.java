@@ -41,6 +41,9 @@ class Particle {
   public void Render(Graphics2D canvas) {
     int drawX = ViewPort.GetDrawX((int)x);
     int drawY = ViewPort.GetDrawY((int)y);
+    if (drawX < -256 || drawY < -256 || drawX > Constants.windowWidth + 256 || drawY > Constants.windowHeight + 256) {
+      return;
+    }
     AlphaComposite alcom = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, alpha);
     canvas.setComposite(alcom);
     canvas.rotate(rotation, drawX, drawY);

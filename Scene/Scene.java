@@ -14,14 +14,14 @@ import java.util.Collections;
 import java.util.HashMap;
 
 class Scene {
-  public static void Initialize(int s_width, int s_height) {
+  public static void Initialize() {
     if (objects == null) {
       ClearSceneObjects();
     } else {
       System.out.println("Warning: Scene has already been initialized.");
     }
-    width = s_width;
-    height = s_height;
+    width = 0;
+    height = 0;
   }
 
   // Kill all the objects from the scene.
@@ -33,6 +33,11 @@ class Scene {
     for (GameObject.OBJECTTYPE val : GameObject.OBJECTTYPE.values()) {
       objectTypeCount.put(val, 0);
     }
+  }
+
+  public static void SetSize(double s_width, double s_height) {
+    width = (int)s_width;
+    height = (int)s_height;
   }
 
   public static int Width() {

@@ -12,6 +12,7 @@ class Background extends GameObject {
     super(0, 0);
     SetImage("background", 0, 0);
     SetType(OBJECTTYPE.BACKGROUND);
+    FlagNoClipDraw();
     depth = 1000;
     scene_width = width;
     scene_height = height;

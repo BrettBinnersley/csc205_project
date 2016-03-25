@@ -8,8 +8,8 @@ import java.util.ArrayList;
 
 class SceneManager {
   // Initalize the scene manager
-  public static void Initialize(String init_scene, int width, int height) {
-    Scene.Initialize(width, height);
+  public static void Initialize(String init_scene) {
+    Scene.Initialize();
     switch_scene = init_scene.toLowerCase();
     if (init_scene != null) {
       LoadSceneObjects();
