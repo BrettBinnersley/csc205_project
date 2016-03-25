@@ -12,7 +12,7 @@ class Bullet extends GameObject {
     super(s_x, s_y);
     SetSolid(16, 16);
     SetType(OBJECTTYPE.BULLET);
-    depth = -2;
+    depth = 1;
     speed = 20.0;
     rotation = rot;
     ownerId = s_ownerId;
@@ -32,7 +32,8 @@ class Bullet extends GameObject {
   // Hit an enemy - stop the bullet
   @Override
   public void Collision(GameObject other) {
-    if (other.type == OBJECTTYPE.WALL) {
+    if (other.type == OBJECTTYPE.WALL ||
+        other.type == OBJECTTYPE.TREE) {
       Destroy();
     }
     if (other.type == OBJECTTYPE.ENEMY || other.type == OBJECTTYPE.PLAYER) {

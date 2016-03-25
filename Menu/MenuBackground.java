@@ -13,13 +13,13 @@ class MenuBackground extends GameObject {
     SetImage("menuBackground", 0, 0);
     SetType(OBJECTTYPE.BACKGROUND);
     depth = 1000;
-    scene_width = Scene.Width();
-    scene_height = Scene.Height();
   }
 
   // Render the background
   @Override
   public void Render(Graphics2D canvas) {
+    scene_width = Constants.windowWidth;
+    scene_height = Constants.windowHeight;
     // Randomly spawn enemys on the menu
     if (Math.random() < 0.03) {
       Enemy e = new Enemy(1 + (int)(Math.random() * scene_width), 1 + (int)(Math.random() * scene_height));

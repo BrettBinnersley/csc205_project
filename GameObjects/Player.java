@@ -18,7 +18,7 @@ class Player extends GameObject {
     SetSolid(16, 16);
     SetType(OBJECTTYPE.PLAYER);
     moveSpeed = 3.0;
-    depth = -10;
+    depth = 0;
     footprintSystem = new PS_Footprint();
     Scene.AddObject(footprintSystem);
   }
@@ -65,7 +65,8 @@ class Player extends GameObject {
   @Override
   public void Collision(GameObject other) {
     if (other.type == OBJECTTYPE.ENEMY ||
-        other.type == OBJECTTYPE.WALL) {
+        other.type == OBJECTTYPE.WALL ||
+        other.type == OBJECTTYPE.TREE) {
       x = x_prev;
       y = y_prev;
     }

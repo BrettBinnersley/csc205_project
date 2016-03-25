@@ -278,9 +278,10 @@ class GameLoop extends JComponent {
 
 		// Render the objects in the correct depth order
 		ArrayList<GameObject> sorted = Scene.GetSortedObjects();
+    int maxWidth = Constants.windowWidth + 256;
+    int maxHeight = Constants.windowHeight + 256;
 		for (GameObject obj : sorted) {
-      if (obj.clipViewPort && (obj.drawX < -256 || obj.drawY < -256 || obj.drawX > Constants.windowWidth + 256 ||
-          obj.drawY > Constants.windowHeight + 256)) {
+      if (obj.clipViewPort && (obj.drawX < -256 || obj.drawY < -256 || obj.drawX > maxWidth || obj.drawY > maxHeight)) {
         continue;
       }
 			AffineTransform trans = g2d.getTransform();  // Get current transform state.

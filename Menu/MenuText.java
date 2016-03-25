@@ -32,8 +32,8 @@ class MenuText extends GameObject {
       "Shoot LMB"
     };
 
-    int drawX = Scene.Width() / 2;
-    int drawY = Scene.Height() / 2 - (messages.length * strHeight / 2) - 150;  // Bad hardcoded constants. BLEH
+    int drawX = Constants.windowWidth / 2;
+    int drawY = 75;  // Bad hardcoded constants. BLEH
     for (String msg : messages) {
       drawY += (int)(strHeight * 1.2);
       int strWidth = metrics.stringWidth(msg) / 2;

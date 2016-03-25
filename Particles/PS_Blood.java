@@ -7,7 +7,7 @@ Created at the center of a destroyed enemy
 
 class PS_Blood extends ParticleSystem {
   public PS_Blood(double x, double y) {
-    super((int)x, (int)y, 2);
+    super((int)x, (int)y, 10);
     int intx = (int)x;
     int inty = (int)y;
 

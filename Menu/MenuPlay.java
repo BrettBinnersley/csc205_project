@@ -41,8 +41,8 @@ class MenuPlay extends GameObject {
     // Do the maths.
     FontMetrics metrics = canvas.getFontMetrics(font);
     int strHeight = metrics.getHeight();
-    int drawX = Scene.Width() / 2;
-    int drawY = Scene.Height() - 140;  // Bad hardcoded constants. BLEH
+    int drawX = Constants.windowWidth / 2;
+    int drawY = Constants.windowHeight - 140;  // Bad hardcoded constants. BLEH
     int strWidth = metrics.stringWidth(message) / 2;
 
     // Set XM, YM, Width, Height (Lazy here... Derp)

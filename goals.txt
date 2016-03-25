@@ -4,9 +4,6 @@ Gameplay:
     - IE: Multiple NPC players that interact with each other AND everything in the scene.
  - Well defined goal (story?)
 
-View:
- - Scrolling View (IE: Scene is sized 2000x2000, and the view follows the player). I don't know how possible this is, but would like to look into it.
-
 Graphics:
  - Transparency in images
  - Color filters (Draw same image with different colors overlayed: IE: green enhanced)

@@ -17,6 +17,7 @@ class Enemy extends GameObject {
     SetSolid(18, 18);
     SetImage("person", 39, 39);
     SetType(OBJECTTYPE.ENEMY);
+    depth = 1;
     ResetTarget();
     footprintSystem = new PS_Footprint();
     Scene.AddObject(footprintSystem);
@@ -69,6 +70,7 @@ class Enemy extends GameObject {
     }
     if (other.type == OBJECTTYPE.ENEMY ||
         other.type == OBJECTTYPE.PLAYER ||
+        other.type == OBJECTTYPE.TREE ||
         other.type == OBJECTTYPE.WALL) {
       x = x_prev;
       y = y_prev;

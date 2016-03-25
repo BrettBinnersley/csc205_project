@@ -6,7 +6,7 @@ Particle System that contains all the snow particles.
 
 class PS_Snow extends ParticleSystem {
   public PS_Snow() {
-    super(0, 0, -1000);
+    super(0, 0, -100);
   }
 
   public void ParticleSystemStep() {

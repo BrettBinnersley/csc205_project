@@ -12,7 +12,7 @@ class HUD extends GameObject {
     super(0, 0);
     SetType(OBJECTTYPE.HUD);
     FlagNoClipDraw();
-    depth = -100;
+    depth = -1000;
     hudDamage = 0;
   }
 
@@ -24,16 +24,18 @@ class HUD extends GameObject {
   // Render a player
   @Override
   public void Render(Graphics2D canvas) {
+    // Draw Damage over the HUD
     if (hudDamage < 0) {
       hudDamage = 0;
     }
-    if (hudDamage > 100) {
-      hudDamage = 100;
+    if (hudDamage > 120) {
+      hudDamage = 120;
     }
     if (hudDamage > 0) {
       canvas.setColor(new Color(160, 0, 0, hudDamage));
       canvas.fillRect(0, 0, Constants.windowWidth, Constants.windowHeight);
     }
+
     // Draw healthbar
     canvas.setColor(new Color(255, 255, 255));
     canvas.fillRect(10, 10, 200, 16);

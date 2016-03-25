@@ -7,7 +7,8 @@
 	 This file is the entry point for the application. It will start the game.
 */
 
-
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import java.util.ArrayList;
@@ -34,7 +35,13 @@ public class Start {
 		viewerWindow.setTitle("CSC 205 Game - Brett Binnersley. V00776751");
 		viewerWindow.setBounds(100, 100, width, height + 25);  // magic number added from example. Left here.
 		viewerWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
+    viewerWindow.setResizable(true);
+    viewerWindow.addComponentListener(new ComponentAdapter() {
+      public void componentResized(ComponentEvent e) {
+        Constants.windowWidth = viewerWindow.getWidth();
+        Constants.windowHeight = viewerWindow.getHeight();
+      }
+    });
 		loop = new GameLoop(width, height);
 		viewerWindow.getContentPane().add(loop, BorderLayout.CENTER);
 	}

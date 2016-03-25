@@ -30,7 +30,7 @@ class SceneCreator {
     Scene.SetSize(scene_width, scene_height);
     ArrayList<GameObject> objects = new ArrayList<GameObject>();
     objects.add(new Background((int)scene_width, (int)scene_height));
-    objects.add(new Sky((int)scene_width, (int)scene_height));
+    objects.add(new Sky());
     objects.add(new PS_Snow());
     objects.add(new HUD());
     objects.add(new Wall());
@@ -48,6 +48,10 @@ class SceneCreator {
       } else {
         objects.add(new Enemy(Scene.Width() - 1 - (int)(Math.random() * halfWidth), 1 + (int)(Math.random() * scene_height)));
       }
+    }
+
+    for (int i=0; i<4; ++i) {
+      objects.add(new Tree(1 + (int)(Math.random() * scene_width), 1 + (int)(Math.random() * scene_height)));
     }
     return objects;
   }
