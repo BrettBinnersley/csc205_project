@@ -46,7 +46,7 @@ class Bullet extends GameObject {
   @Override
   public void Render(Graphics2D canvas) {
     canvas.setColor(new Color(0, 0, 0));
-    canvas.fillOval((int)x - 5, (int)y - 5, 10, 10);
+    canvas.fillOval(drawX - 5, drawY - 5, 10, 10);
   }
 
   private double speed;

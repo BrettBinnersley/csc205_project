@@ -46,6 +46,7 @@ class SceneManager {
   /////////////////////
 
   private static void LoadSceneObjects() {
+    ViewPort.SetFollowObject(null);  // Update ViewPort
     Scene.ClearSceneObjects();  // Re-create the scene (deletes objects in it)
     ArrayList<GameObject> objects = null;
     switch (switch_scene) {

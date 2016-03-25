@@ -34,6 +34,8 @@ class GameObject implements Comparable<GameObject> {
 		y_prev = y;
 		origin_x = 0;
 		origin_y = 0;
+    drawX = 0;
+    drawY = 0;
 		depth = 0;
 		id = ID.GenID();
 		flaggedDelete = false;
@@ -108,6 +110,8 @@ class GameObject implements Comparable<GameObject> {
 	public double x_prev;  // Previous XPosition for this object
 	public double y_prev;  // Previous YPosition for this object
 	public double rotation;  // Rotation of this object (in radians).
+  public int drawX;  // Transformed with the viewport
+  public int drawY;  // Transformed with the viewport
 
 	// For rendering
 	public int origin_x;  // Origin (rotaiton point) for the image (pixel)

@@ -30,7 +30,13 @@ class SceneCreator {
     objects.add(new Background((int)scene_width, (int)scene_height));
     objects.add(new PS_Snow());
     objects.add(new Wall());
-    objects.add(new Player(200, 200));
+
+    // Follow the player in this scene.
+    GameObject player = new Player(200, 200);
+    objects.add(player);
+    ViewPort.SetFollowObject(player);
+
+    // Create the enemies
     double halfWidth = (double)(Scene.Width() / 2) - 30.0;
     for (int i=0; i<10; ++i) {
       if (Math.random() > 0.5) {  // Create on left or right side of the wall.

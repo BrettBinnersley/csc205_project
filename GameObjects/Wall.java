@@ -18,6 +18,6 @@ class Wall extends GameObject {
   // Render the wall
   @Override
   public void Render(Graphics2D canvas) {
-    canvas.drawImage(image, (int)x - origin_x, (int)y - origin_y, null);
+    canvas.drawImage(image, drawX - origin_x, drawY - origin_y, null);
   }
 }

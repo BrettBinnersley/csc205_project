@@ -74,7 +74,7 @@ class Player extends GameObject {
   // Set player rotation
   @Override
   public void LogicStep() {
-    rotation = Math.atan2(Mouse.Y() - y, Mouse.X() - x);
+    rotation = Math.atan2(Mouse.Y() - drawY, Mouse.X() - drawX);
     if (x < 0) {
       x = 0;
     }
@@ -102,9 +102,10 @@ class Player extends GameObject {
   @Override
   public void Render(Graphics2D canvas) {
     canvas.setColor(new Color(0, 0, 255));
-    canvas.drawLine((int)x, (int)y, Mouse.X(), Mouse.Y());
-    canvas.rotate(rotation, x, y);
-    canvas.drawImage(image, (int)x - origin_x, (int)y - origin_y, null);
+    canvas.drawLine(drawX, drawY, Mouse.X(), Mouse.Y());
+
+    canvas.rotate(rotation, drawX, drawY);
+    canvas.drawImage(image, drawX - origin_x, drawY - origin_y, null);
   }
 
   private double moveSpeed;

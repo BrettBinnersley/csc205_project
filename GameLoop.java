@@ -264,6 +264,8 @@ class GameLoop extends JComponent {
 		for (GameObject obj : allObjects) {
 			obj.x_prev = obj.x;
 			obj.y_prev = obj.y;
+      obj.drawX = ViewPort.GetX((int)obj.x);
+      obj.drawY = ViewPort.GetY((int)obj.y);
 		}
 	}
 
@@ -290,6 +292,7 @@ class GameLoop extends JComponent {
 	public void paintComponent(Graphics g) {
 		RunEvents();									  // Run all the events for every object.
     Scene.RemoveFlaggedObjects();   // Remove all flagged objects (from events)
+    ViewPort.UpdateView();          // Update the viewport
     RenderAllObjects(g);				    // Render Everything
     if (!SceneManager.RunSceneChangeFromGameLoop()) {
       // Scene didn't change. Add queued objects.

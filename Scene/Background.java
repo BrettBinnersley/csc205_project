@@ -22,7 +22,7 @@ class Background extends GameObject {
   public void Render(Graphics2D canvas) {
     for (int y=0; y<scene_height; y+=256) {
       for (int x=0; x<scene_width; x+=256) {
-        canvas.drawImage(image, x, y, null);
+        canvas.drawImage(image, drawX + x, drawY + y, null);
       }
     }
   }

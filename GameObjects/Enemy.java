@@ -81,8 +81,8 @@ class Enemy extends GameObject {
   public void Render(Graphics2D canvas) {
     // canvas.setColor(new Color(255, 0, 0));
     // canvas.fillOval((int)x - 20, (int)y - 20, 40, 40);
-    canvas.rotate(rotation, x, y);
-    canvas.drawImage(image, (int)x - origin_x, (int)y - origin_y, null);
+    canvas.rotate(rotation, drawX, drawY);
+    canvas.drawImage(image, drawX - origin_x, drawY - origin_y, null);
   }
 
   // Set target for this object to walk towards.
