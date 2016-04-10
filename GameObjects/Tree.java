@@ -34,9 +34,13 @@ class Tree extends GameObject {
     }
 
     AlphaComposite alcom = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, alpha);
+
+    // canvas.translate(-256, -256);
     canvas.rotate(rotation, drawX, drawY);
-    canvas.drawImage(image, drawX - origin_x, drawY - origin_y, null);
+    canvas.drawImage(image, drawX - origin_x, drawY - origin_y, null);  // Draw the trunk
     canvas.setComposite(alcom);
+    // Draw the leaves
+
     canvas.drawImage(treeLeafBot, drawX - 256, drawY - 256, null);
   }
 
