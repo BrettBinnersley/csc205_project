@@ -38,9 +38,9 @@ class HUD extends GameObject {
 
     // Draw healthbar
     canvas.setColor(new Color(255, 255, 255));
-    canvas.fillRect(10, 10, 200, 16);
+    canvas.fillRect(10, 10, 200, 32);
     canvas.setColor(new Color(0, 255, 0));
-    canvas.fillRect(12, 12, (int)(196 * (double)Globals.playerHealth / (double)Globals.maxPlayerHealth), 12);
+    canvas.fillRect(12, 12, (int)(196 * (double)Globals.playerHealth / (double)Globals.maxPlayerHealth), 28);
   }
 
   public static void AddPlayerDamage(int dmg) {
