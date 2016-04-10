@@ -1,7 +1,8 @@
 /* Background
 Brett Binnersley, V00776751
 
-Renders the background of the scene (Grass)
+Renders the background of the scene (Sky)
+that is behind the player.
 */
 
 import java.awt.Graphics2D;

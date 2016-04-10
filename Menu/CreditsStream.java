@@ -22,6 +22,7 @@ class CreditsStream extends ParticleSystem {
   public void ParticleSystemStep() {
     int setx = (int)(Math.random() * Constants.windowWidth);
     int sety = (int)(Math.random() * Constants.windowHeight);
+    AddParticle(new Particle_Snow(setx, sety));  // Snow!
     time = time - 1;
     if (time < 0) {
       Credit c = credits.get(creditIndex);
