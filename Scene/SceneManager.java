@@ -50,8 +50,12 @@ class SceneManager {
     Scene.ClearSceneObjects();  // Re-create the scene (deletes objects in it)
     ArrayList<GameObject> objects = null;
     switch (switch_scene) {
-      case "menu":
-        objects =  SceneCreator.CreateMenu();
+      case "mainmenu":
+        objects =  SceneCreator.CreateMainMenu();
+      break;
+
+      case "menucredits":
+        objects =  SceneCreator.CreateCreditsMenu();
       break;
 
       case "room1":

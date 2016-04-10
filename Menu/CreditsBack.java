@@ -10,9 +10,9 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontMetrics;
 
-class MenuPlay extends GameObject {
+class CreditsBack extends GameObject {
 
-  public MenuPlay() {
+  public CreditsBack() {
     super(0, 0);
     SetType(OBJECTTYPE.MENUITEM);
     depth = 0;
@@ -30,14 +30,14 @@ class MenuPlay extends GameObject {
   @Override
   public void HandleMousePress(int btn) {
     if (btn == MouseEvent.BUTTON1 && MouseIsHovering()) {
-      SceneManager.SetScene("room1");  // Switch scene
+      SceneManager.SetScene("mainmenu");  // Switch scene
     }
   }
 
   // Render the button
   @Override
   public void Render(Graphics2D canvas) {
-    String message = "Click Here To Play";
+    String message = "Back";
     // Do the maths.
     FontMetrics metrics = canvas.getFontMetrics(font);
     int strHeight = metrics.getHeight();

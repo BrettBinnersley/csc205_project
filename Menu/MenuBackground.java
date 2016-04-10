@@ -8,11 +8,12 @@ import java.awt.Graphics2D;
 
 class MenuBackground extends GameObject {
 
-  public MenuBackground() {
+  public MenuBackground(boolean s_spawnEnemies) {
     super(0, 0);
     SetImage("menuBackground", 0, 0);
     SetType(OBJECTTYPE.BACKGROUND);
     depth = 1000;
+    spawnEnemies = s_spawnEnemies;
   }
 
   // Render the background
@@ -21,10 +22,12 @@ class MenuBackground extends GameObject {
     scene_width = Constants.windowWidth;
     scene_height = Constants.windowHeight;
     // Randomly spawn enemys on the menu
-    if (Math.random() < 0.03) {
-      Enemy e = new Enemy(1 + (int)(Math.random() * scene_width), 1 + (int)(Math.random() * scene_height));
-      e.depth = 1;
-      Scene.AddObject(e);
+    if (spawnEnemies) {
+      if (Math.random() < 0.03) {
+        Enemy e = new Enemy(1 + (int)(Math.random() * scene_width), 1 + (int)(Math.random() * scene_height));
+        e.depth = 1;
+        Scene.AddObject(e);
+      }
     }
 
     for (int y=0; y<scene_height; y+=256) {
@@ -36,4 +39,5 @@ class MenuBackground extends GameObject {
 
   private int scene_width;
   private int scene_height;
+  private boolean spawnEnemies;
 }

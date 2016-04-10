@@ -8,18 +8,29 @@ import java.util.ArrayList;
 
 class SceneCreator {
   // Menu
-  public static ArrayList<GameObject> CreateMenu() {
+  public static ArrayList<GameObject> CreateMainMenu() {
     double scene_width = Constants.windowWidth;
     double scene_height = Constants.windowHeight;
     Scene.SetSize(scene_width, scene_height);
     ArrayList<GameObject> objects = new ArrayList<GameObject>();
     objects.add(new MenuText());
+    objects.add(new MenuCredits());
     objects.add(new MenuPlay());
     objects.add(new MenuPS());
-    objects.add(new MenuBackground());
+    objects.add(new MenuBackground(true));
     for (int i=0; i<2; ++i) {
       objects.add(new Enemy(1 + (int)(Math.random() * scene_width), 1 + (int)(Math.random() * scene_height)));
     }
+    return objects;
+  }
+
+  public static ArrayList<GameObject> CreateCreditsMenu() {
+    double scene_width = Constants.windowWidth;
+    double scene_height = Constants.windowHeight;
+    Scene.SetSize(scene_width, scene_height);
+    ArrayList<GameObject> objects = new ArrayList<GameObject>();
+    objects.add(new CreditsBack());
+    objects.add(new MenuBackground(false));
     return objects;
   }
 

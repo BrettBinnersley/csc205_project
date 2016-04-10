@@ -62,7 +62,7 @@ class GameLoop extends JComponent {
 		mouseStates = new ConcurrentHashMap<Integer, MouseState>();
 
 		// Initalize Scene and fill with the basic example.
-		SceneManager.Initialize("menu");  // Scene dimensions can be different than the canvases
+		SceneManager.Initialize("mainmenu");  // Scene dimensions can be different than the canvases
 
 		// Mouse Events
 		addMouseListener(new MouseAdapter() {
