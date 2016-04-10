@@ -10,12 +10,12 @@ class CreditsStream extends ParticleSystem {
   public CreditsStream() {
     super(0, 0, -10);  // Above everything else.
     time = 10;
-    credits = new ArrayList<Credit>() {{
-      add(new Credit("Credits", 75, 40));
-      add(new Credit("Brett Binnnersley", 50, 30));
-      add(new Credit("Programming, Graphics", 50, 50));
-      add(new Credit("Special Thanks", 75, 30));
-      add(new Credit("Bill Bird - Instructor", 50, 120));
+    credits = new ArrayList<Credit>() {{  // Cool way to initialize a list :)
+      add(new Credit("Credits", 75, 60));
+      add(new Credit("Brett Binnnersley", 50, 45));
+      add(new Credit("Programming, Graphics", 50, 75));
+      add(new Credit("Special Thanks", 75, 60));
+      add(new Credit("Bill Bird - Instructor", 50, 180));
     }};
   }
 
@@ -27,7 +27,7 @@ class CreditsStream extends ParticleSystem {
       Credit c = credits.get(creditIndex);
       AddParticle(new Particle_Credit(c.text, c.size));
       time = c.delay;
-      // Spawn next credit soon
+      // Spawn next credit soon (after a delay.)
       creditIndex++;
       if (creditIndex >= credits.size()) {
         creditIndex = 0;

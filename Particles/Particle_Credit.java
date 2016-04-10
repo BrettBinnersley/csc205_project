@@ -4,6 +4,7 @@ Brett Binnersley, V00776751
 Particle for the credits
 */
 
+import java.awt.AlphaComposite;
 import java.awt.Graphics2D;
 import java.awt.Color;
 import java.awt.Font;
@@ -11,9 +12,9 @@ import java.awt.FontMetrics;
 
 class Particle_Credit extends Particle {
   public Particle_Credit(String text, int size) {
-    super(0, 0, 200, null, 0, 0);
-    speed = 2.0f;
-    trueAlpha = 2.0f;
+    super(0, 0, 2000, null, 0, 0);
+    speed = 1.5f;
+    trueAlpha = 1.5f;
     font = new Font("Serif", Font.PLAIN, size);
     message = text;
   }
@@ -42,6 +43,8 @@ class Particle_Credit extends Particle {
     int strWidth = metrics.stringWidth(message) / 2;
 
     Color ctext = new Color(0, 0, 0);
+    AlphaComposite alcom = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, alpha);
+    canvas.setComposite(alcom);
     canvas.setFont(font);
     canvas.setColor(ctext);
     canvas.drawString(message, drawX - strWidth, drawY);
