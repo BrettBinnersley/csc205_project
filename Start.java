@@ -79,7 +79,7 @@ public class Start {
 			last_frame = now_time;
 
 			if (GameLoop.GameHasEnded()) {
-				JOptionPane.showMessageDialog(null, "Congrats! You have destroyed all the enemies. Click 'Ok' to exit the program.");
+        JOptionPane.showMessageDialog(null, "Thanks for playing.");
 				System.exit(0);
 				break;
 			} else {

@@ -18,6 +18,7 @@ class SceneCreator {
     objects.add(new MenuText());
     objects.add(new MenuControls());
     objects.add(new MenuCredits());
+    objects.add(new ExitGame());
     objects.add(new MenuPlay());
     objects.add(new MenuPS());
     objects.add(new MenuBackground(true));
