@@ -9,13 +9,13 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontMetrics;
 
-class MenuText extends GameObject {
+class MenuControlsText extends GameObject {
 
-  public MenuText() {
+  public MenuControlsText() {
     super(0, 0);
     SetType(OBJECTTYPE.MENUITEM);
-    depth = 0;
-    font = new Font("Serif", Font.PLAIN, 64);
+    depth = -10;
+    font = new Font("Serif", Font.PLAIN, 48);
   }
 
   // Render the background
@@ -27,7 +27,13 @@ class MenuText extends GameObject {
 
     int strHeight = metrics.getHeight();
     String messages[] = {
-      "Csc 205 Project!!!"
+      "Control the player below",
+      "WADS to move",
+      "Left mouse button to shoot",
+      "Mouse to aim",
+      "These will be the exact same during gameplay!",
+      "Have fun!",
+      "~Brett"
     };
 
     int drawX = Constants.windowWidth / 2;

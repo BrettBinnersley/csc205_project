@@ -58,12 +58,12 @@ class SceneManager {
         objects =  SceneCreator.CreateCreditsMenu();
       break;
 
-      case "room1":
-        objects =  SceneCreator.CreateRoom1();
+      case "menucontrols":
+        objects =  SceneCreator.CreateControlsMenu();
       break;
 
-      case "room2":
-        objects =  SceneCreator.CreateRoom2();
+      case "room1":
+        objects =  SceneCreator.CreateRoom1();
       break;
 
       default:

@@ -10,9 +10,9 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontMetrics;
 
-class CreditsBack extends GameObject {
+class MenuControls extends GameObject {
 
-  public CreditsBack() {
+  public MenuControls() {
     super(0, 0);
     SetType(OBJECTTYPE.MENUITEM);
     depth = 0;
@@ -30,19 +30,19 @@ class CreditsBack extends GameObject {
   @Override
   public void HandleMousePress(int btn) {
     if (btn == MouseEvent.BUTTON1 && MouseIsHovering()) {
-      SceneManager.SetScene("mainmenu");  // Switch scene
+      SceneManager.SetScene("menucontrols");  // Switch scene to credits.
     }
   }
 
   // Render the button
   @Override
   public void Render(Graphics2D canvas) {
-    String message = "Back";
+    String message = "Controls";
     // Do the maths.
     FontMetrics metrics = canvas.getFontMetrics(font);
     int strHeight = metrics.getHeight();
     int drawX = Constants.windowWidth / 2;
-    int drawY = Constants.windowHeight - 140;  // Bad hardcoded constants. BLEH
+    int drawY = Constants.windowHeight - 300;  // Bad hardcoded constants. BLEH
     int strWidth = metrics.stringWidth(message) / 2;
 
     // Set XM, YM, Width, Height (Lazy here... Derp)

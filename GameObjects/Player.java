@@ -18,7 +18,7 @@ class Player extends GameObject {
     SetSolid(16, 16);
     SetType(OBJECTTYPE.PLAYER);
     moveSpeed = 3.0;
-    depth = 0;
+    depth = -1;
     footprintSystem = new PS_Footprint();
     Scene.AddObject(footprintSystem);
   }

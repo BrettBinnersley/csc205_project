@@ -14,6 +14,7 @@ class SceneCreator {
     Scene.SetSize(scene_width, scene_height);
     ArrayList<GameObject> objects = new ArrayList<GameObject>();
     objects.add(new MenuText());
+    objects.add(new MenuControls());
     objects.add(new MenuCredits());
     objects.add(new MenuPlay());
     objects.add(new MenuPS());
@@ -29,10 +30,23 @@ class SceneCreator {
     double scene_height = Constants.windowHeight;
     Scene.SetSize(scene_width, scene_height);
     ArrayList<GameObject> objects = new ArrayList<GameObject>();
-    objects.add(new CreditsBack());
+    objects.add(new MenuBack());
     objects.add(new MenuBackground(false));
     return objects;
   }
+
+  public static ArrayList<GameObject> CreateControlsMenu() {
+    double scene_width = Constants.windowWidth;
+    double scene_height = Constants.windowHeight;
+    Scene.SetSize(scene_width, scene_height);
+    ArrayList<GameObject> objects = new ArrayList<GameObject>();
+    objects.add(new Player(200, 450));
+    objects.add(new MenuControlsText());
+    objects.add(new MenuBack());
+    objects.add(new MenuBackground(false));
+    return objects;
+  }
+
 
   // First Room
   public static ArrayList<GameObject> CreateRoom1() {
@@ -63,26 +77,6 @@ class SceneCreator {
 
     for (int i=0; i<4; ++i) {
       objects.add(new Tree(1 + (int)(Math.random() * scene_width), 1 + (int)(Math.random() * scene_height)));
-    }
-    return objects;
-  }
-
-  // Second Room
-  public static ArrayList<GameObject> CreateRoom2() {
-    double scene_width = (double)(Scene.Width() - 2);
-    double scene_height = (double)(Scene.Height() - 2);
-    ArrayList<GameObject> objects = new ArrayList<GameObject>();
-    objects.add(new Background((int)scene_width, (int)scene_height));
-    objects.add(new PS_Snow());
-    objects.add(new Wall());
-    objects.add(new Player(200, 200));
-    double halfWidth = (double)(Scene.Width() / 2) - 30.0;
-    for (int i=0; i<10; ++i) {
-      if (Math.random() > 0.5) {  // Create on left or right side of the wall.
-        objects.add(new Enemy(1 + (int)(Math.random() * halfWidth), 1 + (int)(Math.random() * scene_height)));
-      } else {
-        objects.add(new Enemy(Scene.Width() - 1 - (int)(Math.random() * halfWidth), 1 + (int)(Math.random() * scene_height)));
-      }
     }
     return objects;
   }
