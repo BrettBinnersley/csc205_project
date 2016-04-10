@@ -30,6 +30,7 @@ class SceneCreator {
     double scene_height = Constants.windowHeight;
     Scene.SetSize(scene_width, scene_height);
     ArrayList<GameObject> objects = new ArrayList<GameObject>();
+    objects.add(new CreditsStream());
     objects.add(new MenuBack());
     objects.add(new MenuBackground(false));
     return objects;

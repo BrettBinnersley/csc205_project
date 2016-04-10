@@ -1,7 +1,7 @@
 /* Background
 Brett Binnersley, V00776751
 
-Renders the background of the scene (Grass)
+Renders the credits butoon
 */
 
 import java.awt.event.MouseEvent;

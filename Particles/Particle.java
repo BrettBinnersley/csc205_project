@@ -26,9 +26,15 @@ class Particle {
     x = s_x;
     y = s_y;
     life = s_life;
-    image = Resources.GetImage(s_img);
-    origin_x = s_origin_x;
-    origin_y = s_origin_y;
+    if (s_img != null) {
+      image = Resources.GetImage(s_img);
+      origin_x = s_origin_x;
+      origin_y = s_origin_y;
+    } else {
+      image = null;
+      origin_x = 0;
+      origin_y = 0;
+    }
     alpha = 1.0f;
   }
 

@@ -1,7 +1,7 @@
 /* Background
 Brett Binnersley, V00776751
 
-Renders the background of the scene (Grass)
+Renders the control button
 */
 
 import java.awt.event.MouseEvent;

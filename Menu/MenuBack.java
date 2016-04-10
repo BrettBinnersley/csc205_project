@@ -1,7 +1,7 @@
 /* Background
 Brett Binnersley, V00776751
 
-Renders the background of the scene (Grass)
+Renders the back button for the menu
 */
 
 import java.awt.event.MouseEvent;

@@ -12,7 +12,7 @@ javac *.java Scene/*.java GameObjects/*.java Particles/*.java Menu/*.java -d bin
 cd bin
 java Start
 
-Or, on Mac / Linux
+Or, on Mac / Linux simply try:
 ./run
 
 
