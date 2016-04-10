@@ -25,7 +25,7 @@ class Sky extends GameObject {
         canvas.drawImage(image, x, y, null);
       }
     }
-    if (Math.random() < 0.07) {  // Spawn an enemy! (Randomly)
+    if (Math.random() < 0.05) {  // Spawn an enemy! (Randomly)
       Scene.AddObject(new Enemy(1 + (int)(Math.random() * Scene.Width()), 1 + (int)(Math.random() * Scene.Height())));
     }
   }

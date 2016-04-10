@@ -9,6 +9,8 @@ import java.util.ArrayList;
 class SceneCreator {
   // Menu
   public static ArrayList<GameObject> CreateMainMenu() {
+    Globals.kills = 0;  // Bad place for this, but it is here :/
+    Globals.playerHealth = Globals.maxPlayerHealth;
     double scene_width = Constants.windowWidth;
     double scene_height = Constants.windowHeight;
     Scene.SetSize(scene_width, scene_height);
@@ -31,6 +33,18 @@ class SceneCreator {
     Scene.SetSize(scene_width, scene_height);
     ArrayList<GameObject> objects = new ArrayList<GameObject>();
     objects.add(new CreditsStream());
+    objects.add(new MenuBack());
+    objects.add(new MenuBackground(false));
+    return objects;
+  }
+
+
+  public static ArrayList<GameObject> CreateGameOver() {
+    double scene_width = Constants.windowWidth;
+    double scene_height = Constants.windowHeight;
+    Scene.SetSize(scene_width, scene_height);
+    ArrayList<GameObject> objects = new ArrayList<GameObject>();
+    objects.add(new GameOverText());
     objects.add(new MenuBack());
     objects.add(new MenuBackground(false));
     return objects;

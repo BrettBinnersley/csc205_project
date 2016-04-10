@@ -28,10 +28,6 @@ class Enemy extends GameObject {
   public void OnDestroyed() {
     footprintSystem.DestroyWhenEmpty();
     Scene.AddObject(new PS_Blood(x, y));
-
-    if (Scene.GetNumberObjectType(OBJECTTYPE.ENEMY) == 0) {
-      GameLoop.EndGame();
-    }
   }
 
   @Override
@@ -66,6 +62,9 @@ class Enemy extends GameObject {
     if (other.type == OBJECTTYPE.BULLET) {
       if (((Bullet)other).ownerId != id) {
         Destroy();
+        if (((Bullet)other).ownerId == Globals.playerID) {
+          Globals.kills += 1;
+        }
       }
     }
     if (other.type == OBJECTTYPE.ENEMY ||

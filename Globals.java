@@ -6,6 +6,8 @@ Hardcoded constants - quick and dirty solution to constants.
 
 
 class Globals {
-  public static int playerHealth = 50;
-  public static int maxPlayerHealth = 50;
+  public static int playerID = -1;
+  public static int playerHealth = 25;
+  public static int maxPlayerHealth = 25;
+  public static int kills = 0;
 }

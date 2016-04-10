@@ -4,6 +4,7 @@ Brett Binnersley, V00776751
 Defines a bullet shot by the player.
 */
 
+import java.awt.Font;
 import java.awt.Color;
 import java.awt.Graphics2D;
 
@@ -14,11 +15,12 @@ class HUD extends GameObject {
     FlagNoClipDraw();
     depth = -1000;
     hudDamage = 0;
+    font = new Font("Serif", Font.PLAIN, 25);
   }
 
   @Override
   public void LogicStep() {
-    hudDamage -= 3;
+    hudDamage -= 2;
   }
 
   // Render a player
@@ -41,12 +43,17 @@ class HUD extends GameObject {
     canvas.fillRect(10, 10, 200, 32);
     canvas.setColor(new Color(0, 255, 0));
     canvas.fillRect(12, 12, (int)(196 * (double)Globals.playerHealth / (double)Globals.maxPlayerHealth), 28);
+    canvas.setColor(new Color(0, 0, 0));
+    canvas.setFont(font);
+    canvas.drawString("Kills: " + Globals.kills, 20, 34);
   }
 
   public static void AddPlayerDamage(int dmg) {
     hudDamage += dmg;
   }
 
+
+  private Font font;
   private double speed;
   private static int hudDamage;  // Owner can not be killed by their own bullet
 }

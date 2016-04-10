@@ -66,6 +66,10 @@ class SceneManager {
         objects =  SceneCreator.CreateRoom1();
       break;
 
+      case "gameover":
+        objects = SceneCreator.CreateGameOver();
+      break;
+
       default:
         System.out.println(switch_scene);
         System.out.println("Error: Unknown Target Scene");

@@ -21,6 +21,7 @@ class Player extends GameObject {
     depth = -1;
     footprintSystem = new PS_Footprint();
     Scene.AddObject(footprintSystem);
+    Globals.playerID = id;
   }
 
   @Override
@@ -73,8 +74,11 @@ class Player extends GameObject {
     if (other.type == OBJECTTYPE.BULLET) {
       if (((Bullet)other).ownerId != id) {
         Scene.AddObject(new PS_Blood(x, y));
-        HUD.AddPlayerDamage(60);
+        HUD.AddPlayerDamage(100);
         Globals.playerHealth -= 10;
+        if (Globals.playerHealth <= 0) {
+          SceneManager.SetScene("gameover");
+        }
       }
     }
   }
