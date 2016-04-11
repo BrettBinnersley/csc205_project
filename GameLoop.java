@@ -295,7 +295,9 @@ class GameLoop extends JComponent {
 	// Draw all the objects that still exist in the game.
 	@Override
 	public void paintComponent(Graphics g) {
-		RunEvents();									  // Run all the events for every object.
+    if (!SceneManager.SwitchingScene()) {
+      RunEvents();									  // Run all the events for every object only if the scene is not transitioning.
+    }
     Scene.RemoveFlaggedObjects();   // Remove all flagged objects (from events)
     ViewPort.UpdateView();          // Update the viewport
     RenderAllObjects(g);				    // Render Everything

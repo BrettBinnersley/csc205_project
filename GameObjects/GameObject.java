@@ -26,6 +26,7 @@ class GameObject implements Comparable<GameObject> {
     MENUITEM,
     HUD,
     HUDITEM,
+    SCENETRANSITION,
 	}
 
 	// Constructor / Destructor. Should be invoked with super (...) from the Constructor

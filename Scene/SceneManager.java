@@ -11,6 +11,7 @@ class SceneManager {
   public static void Initialize(String init_scene) {
     Scene.Initialize();
     switch_scene = init_scene.toLowerCase();
+    switchObject = null;
     if (init_scene != null) {
       LoadSceneObjects();
     } else {
@@ -20,20 +21,24 @@ class SceneManager {
 
   // Is the scene being changed after this frame ??
   public static boolean SwitchingScene() {
-    return switch_scene == null;
+    return switch_scene != null;
   }
 
   // Actually set the scene
   public static void SetScene(String target) {
     switch_scene = target.toLowerCase();
+    switchObject = new SceneTransition(0, 0, 0);
+    Scene.AddObject(switchObject);
   }
 
   // This should never be called by anything other than the GameLoop.
   // Returns true if the scene did change. Returns false if the scene didn't
   public static boolean RunSceneChangeFromGameLoop() {
     if (switch_scene != null) {
-      LoadSceneObjects();
-      return true;
+      if (switchObject.IsDoneTransition()) {
+        LoadSceneObjects();
+        return true;
+      }
     }
     return false;
   }
@@ -76,6 +81,9 @@ class SceneManager {
         return;
     }
 
+    // Enter a new scene (fade in transition)
+    objects.add(new SceneEntry(0, 0, 0));
+
     // Add the new objects
     Scene.AddObjects(objects);
     Scene.AddQueuedObjectsToScene();
@@ -86,4 +94,5 @@ class SceneManager {
 
   // Variables for the scene manager
   private static String switch_scene;
+  public static SceneTransition switchObject;
 }
