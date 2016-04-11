@@ -25,6 +25,7 @@ Features Implemented:
   - Optimizations to NOT call render event on any object outside of the viewport
   - HUD that does not follow viewport (for displaying health & score)
 - Window resizing works in any scene
+  - Viewport gets adjusted accordingly, which will modify all the objects draw positions.
 - Several Scenes with smooth transitions between them
   - Gameloop stops processing all logic events while the scene is transitioning (IE: Pauses), while the render logic still goes on.
 - Menu with interactive buttons (hover to change color)
